@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>History &amp; Methods of Psychology — 350-Question Practice Exam</title>
+<style>
+  :root{
+    --bg:#fbf9f4; --paper:#fffdf8; --ink:#36332e; --ink-soft:#5d574c; --ink-faint:#928a7b;
+    --line:#e6e0d3; --brass:#b08d57;
+    --t1:#8d7bb0; --t2:#4a9e92; --t3:#cf7b95; --t4:#c79a4e; --t5:#5a87b8; --t6:#7ba35f; --t7:#cf7355;
+    --ok:#3f9e6e; --ok-bg:#e4f5ec; --no:#d3645c; --no-bg:#fbe7e5;
+    --shadow:0 4px 16px rgba(70,55,30,.08); --shadow-lg:0 12px 34px rgba(70,55,30,.14);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:"Segoe UI",Inter,system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);line-height:1.55;
+    background:radial-gradient(1000px 500px at 85% -8%,#efeaf6 0,transparent 55%),
+      radial-gradient(900px 500px at -8% 25%,#e7f0de 0,transparent 50%),var(--bg);
+    -webkit-font-smoothing:antialiased;}
+
+  header.hero{text-align:center;padding:46px 20px 14px;max-width:860px;margin:0 auto;}
+  header .stamp{letter-spacing:.3em;font-size:11px;font-weight:700;color:var(--brass);text-transform:uppercase;}
+  header h1{font-family:var(--serif);font-size:clamp(26px,4.4vw,42px);margin:8px 0 4px;color:#2c2a25;font-weight:700;}
+  header p{color:var(--ink-soft);font-size:15px;margin:6px 0 0;}
+
+  /* overall score bar (sticky) */
+  .scorebar{position:sticky;top:0;z-index:60;background:rgba(251,249,244,.92);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);padding:10px 16px;display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;}
+  .scorebar .pill{font-size:13px;font-weight:700;color:var(--ink);background:var(--paper);border:1px solid var(--line);
+    border-radius:999px;padding:6px 14px;box-shadow:var(--shadow);}
+  .scorebar .pill b{color:var(--ok);}
+  .scorebar .pill .w{color:var(--no);}
+  .bar{flex:1;max-width:340px;height:10px;background:#ece6da;border-radius:6px;overflow:hidden;min-width:160px;}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--t6),var(--t5));transition:width .3s;}
+
+  /* theme tabs */
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:16px 14px 4px;max-width:1000px;margin:0 auto;}
+  .tab{cursor:pointer;border:1px solid var(--line);background:var(--paper);border-radius:11px;padding:9px 13px;
+    font-size:12.5px;font-weight:700;color:var(--ink-soft);box-shadow:var(--shadow);transition:.18s;display:flex;flex-direction:column;gap:2px;align-items:center;min-width:96px;}
+  .tab:hover{transform:translateY(-2px);}
+  .tab.active{color:#fff;border-color:transparent;}
+  .tab .tn{font-size:10px;opacity:.85;font-weight:800;letter-spacing:.04em;}
+  .tab .sc{font-size:11px;font-weight:700;opacity:.9;}
+  .tab.active .sc{color:#fff;}
+
+  .wrap{max-width:880px;margin:0 auto;padding:10px 18px 60px;}
+  .theme-head{display:flex;align-items:center;gap:14px;margin:18px 0 4px;}
+  .theme-head .badge{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;color:#fff;font-family:var(--serif);font-weight:700;font-size:22px;box-shadow:var(--shadow);}
+  .theme-head h2{font-family:var(--serif);margin:0;font-size:clamp(19px,2.6vw,26px);color:#2c2a25;}
+  .theme-head .sub{font-size:12.5px;color:var(--ink-faint);font-weight:600;}
+  .theme-progress{margin:10px 0 18px;}
+  .theme-progress .row{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;color:var(--ink-soft);margin-bottom:5px;}
+  .theme-progress .bar{max-width:none;}
+
+  .q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--shadow);border-left:5px solid var(--accent);}
+  .q .qhead{display:flex;gap:10px;margin-bottom:11px;}
+  .q .num{flex:0 0 auto;font-family:var(--serif);font-weight:700;font-size:15px;color:var(--accent);background:var(--accent-bg);border-radius:8px;min-width:34px;height:28px;display:grid;place-items:center;padding:0 6px;}
+  .q .qt{font-size:14.5px;font-weight:600;color:var(--ink);padding-top:3px;}
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 13px;font-size:13.5px;color:var(--ink);
+    cursor:pointer;transition:.14s;display:flex;gap:9px;align-items:flex-start;font-family:inherit;}
+  .opt:hover:not(.locked){border-color:var(--accent);background:var(--accent-bg);}
+  .opt .lt{flex:0 0 auto;font-weight:800;color:var(--ink-faint);}
+  .opt.locked{cursor:default;}
+  .opt.correct{background:var(--ok-bg);border-color:var(--ok);color:#1f6b46;}
+  .opt.correct .lt{color:var(--ok);}
+  .opt.wrong{background:var(--no-bg);border-color:var(--no);color:#9c352e;}
+  .opt.wrong .lt{color:var(--no);}
+  .opt.dim{opacity:.55;}
+  .opt .mark{margin-left:auto;font-weight:800;}
+  .expl{margin-top:11px;font-size:13px;border-radius:10px;padding:10px 13px;display:none;}
+  .expl.show{display:block;}
+  .expl.r{background:var(--ok-bg);color:#1f6b46;border:1px solid #bfe6cf;}
+  .expl.w{background:var(--no-bg);color:#9c352e;border:1px solid #f0c9c5;}
+  .expl b{font-weight:800;}
+  .expl .verdict{font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:11px;margin-right:6px;}
+
+  .theme-done{display:none;text-align:center;background:linear-gradient(135deg,#e4f5ec,#deecf9);border:1px solid var(--line);
+    border-radius:14px;padding:18px;margin:8px 0 20px;font-size:15px;font-weight:700;color:var(--ink);box-shadow:var(--shadow);}
+  .theme-done.show{display:block;}
+
+  footer{text-align:center;padding:30px 20px 60px;color:var(--ink-faint);font-size:12px;}
+  @media(max-width:560px){.tab{min-width:0;flex:1 1 28%;}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="stamp">★ Practice Examination ★</div>
+  <h1>History &amp; Methods of Psychology</h1>
+  <p>350 multiple-choice questions · 50 per theme · pick an answer to reveal right/wrong + a short explanation.</p>
+</header>
+
+<div class="scorebar">
+  <div class="pill">Overall: <b id="ovCorrect">0</b> correct · <span class="w" id="ovWrong">0</span> wrong · <span id="ovAns">0</span>/350</div>
+  <div class="bar"><i id="ovBar"></i></div>
+</div>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="wrap" id="quizArea"></div>
+
+<footer>🧠 History &amp; Methods of Psychology — 350-Question Practice Exam · your progress is tracked live but resets when you reload. Good luck! 🍀</footer>
+
+<script>
+/* ===== THEME METADATA ===== */
+const THEMES = [
+  {k:"t1", n:"Theme 1", t:"Early Psychophysics", badge:"①", color:"var(--t1)"},
+  {k:"t2", n:"Theme 2", t:"Schools & Paradigms", badge:"②", color:"var(--t2)"},
+  {k:"t3", n:"Theme 3", t:"The Mind–Body Problem", badge:"③", color:"var(--t3)"},
+  {k:"t4", n:"Theme 4", t:"What Is Knowledge?", badge:"④", color:"var(--t4)"},
+  {k:"t5", n:"Theme 5", t:"Philosophy of Science", badge:"⑤", color:"var(--t5)"},
+  {k:"t6", n:"Theme 6", t:"Research Methods", badge:"⑥", color:"var(--t6)"},
+  {k:"t7", n:"Theme 7", t:"The Credibility Crisis", badge:"⑦", color:"var(--t7)"}
+];
+const QUESTIONS = {};
+
+/* ===== THEME 1 — Early Psychophysics (50) ===== */
+QUESTIONS.t1 = [
+  {q:"What is a 'just-noticeable difference' (JND)?", o:["The smallest change in a stimulus that can be reliably detected","The point at which a stimulus first becomes conscious","The maximum intensity a sense organ can register","The average of two stimulus intensities"], c:0, e:"The JND is the minimum difference in intensity needed for a person to reliably tell two stimuli apart."},
+  {q:"Weber's law states that the JND is…", o:["A fixed absolute amount for every modality","A constant fraction of the baseline stimulus intensity","Inversely proportional to attention","Equal to the logarithm of the stimulus"], c:1, e:"Weber's law: ΔI/I = k — the JND is a constant proportion of the starting intensity, not a fixed amount."},
+  {q:"Who coined the term 'psychophysics' and developed its core methods?", o:["Ernst Weber","Wilhelm Wundt","Gustav Fechner","Hermann Ebbinghaus"], c:2, e:"Fechner named psychophysics and built the forced-choice and adjustment methods relating stimulus to sensation."},
+  {q:"Fechner's law (S = k·log R) says that sensation grows with…", o:["The square of the stimulus","The logarithm of the stimulus intensity","The exponential of the stimulus","The stimulus intensity, linearly"], c:1, e:"Fechner's law is logarithmic: equal ratios of stimulus produce equal increments of sensation."},
+  {q:"Weber's classic demonstration used the…", o:["Two-point touch threshold","Memory drum","Reaction-time chronoscope","Tachistoscope"], c:0, e:"Weber studied the two-point threshold on the skin, leading to his fraction/JND work."},
+  {q:"Why was early psychophysics so important for psychology becoming a science?", o:["It proved the mind was non-physical","It gave the mind something measurable and quantifiable","It rejected all use of mathematics","It abolished the study of sensation"], c:1, e:"Psychophysics turned subjective sensation into physics-style quantitative laws — a measurable foothold for a science of mind."},
+  {q:"In what year did Wundt open the first experimental psychology laboratory?", o:["1859","1879","1890","1904"], c:1, e:"Wundt founded the first lab in Leipzig in 1879, the conventional birthdate of scientific psychology."},
+  {q:"Where was Wundt's first laboratory located?", o:["Vienna","Leipzig","Berlin","Würzburg"], c:1, e:"It was at the University of Leipzig."},
+  {q:"Wundt's foundational 1874 textbook was titled…", o:["Principles of Physiological Psychology","The Principles of Psychology","Elements of Psychophysics","On the Soul"], c:0, e:"His Principles of Physiological Psychology (1874) helped define the new experimental discipline."},
+  {q:"Wundt's controlled experimental method of self-observation is best described as…", o:["Free-association daydreaming","Trained 'inner perception' under repeatable, varied stimulus conditions","Casual self-reflection at any time","Hypnotic regression"], c:1, e:"Wundt's introspection was disciplined inner perception — trained observers, controlled stimuli, repeatable trials — to look scientific."},
+  {q:"A major reason introspection ultimately failed as a method was that it was…", o:["Too cheap to run","Irreplicable — different labs reported different results","Banned by the church","Only usable on animals"], c:1, e:"Leipzig, Cornell and Würzburg observers disagreed about the same stimulus, with no neutral way to settle it."},
+  {q:"The 'imageless thought' controversy concerned whether…", o:["All thought must be accompanied by a mental image","Animals can think","Colour exists without light","Memory uses images only"], c:0, e:"The Würzburg school reported thoughts with no sensory/imaginal content, which Titchener's school denied — exposing introspection's unreliability."},
+  {q:"'Reactivity' as a flaw of introspection means that…", o:["Observers react too slowly","Observing your own experience changes or interrupts it","The stimulus reacts chemically","Two observers always agree"], c:1, e:"You cannot fully have an experience and inspect it at once — the act of inspection alters the experience (split-attention)."},
+  {q:"Wundt's 'Völkerpsychologie' studied…", o:["Reaction times","Language, myth, religion and culture","The two-point threshold","Nerve conduction speed"], c:1, e:"His 10-volume 'second psychology' covered higher cultural processes he thought needed interpretive insight, not the lab."},
+  {q:"In Wundt's own view, Völkerpsychologie was…", o:["The core of experimental psychology","Outside the experimental, lab-based method","A branch of physics","Identical to introspection"], c:1, e:"It was the deliberately non-experimental half of his strategic compromise about what the new science could tackle."},
+  {q:"Locke's 'tabula rasa' hypothesis claims the mind at birth is…", o:["Full of innate ideas","A blank slate written on by experience","Identical to the brain","Incapable of learning"], c:1, e:"Tabula rasa = blank slate: no innate ideas; all knowledge comes from sense experience (empiricism)."},
+  {q:"Locke's 'representationalism' holds that we directly perceive…", o:["External objects themselves","Our own ideas/representations, not objects directly","Other people's minds","Nothing at all"], c:1, e:"For Locke we have access to our ideas of things, not the things in themselves — a step toward the appearance/reality gap."},
+  {q:"David Hartley's associationism is praised for the right 'metatheory' because he held that…", o:["Ideas are caused by an immaterial soul","Brain and nerves cause thought","Thought is random","Only God produces ideas"], c:1, e:"Hartley's framework (mind grounded in brain/nerves) was on the right track even though his vibration mechanism was wrong."},
+  {q:"Hartley's specific (and mistaken) mechanism for association involved…", o:["Electrical synapses","Vibrations of nervous particles","Hydraulic spirits in the ventricles","Quantum effects"], c:1, e:"He proposed vibrating nervous particles — the wrong mechanism under a sound metatheory."},
+  {q:"In associationism, the 'coalescence' hypothesis says that simple ideas…", o:["Stay separate and unchanged","Fuse together into genuinely new ideas","Cancel each other out","Cannot combine at all"], c:1, e:"Coalescence (Hartley): ideas merge into something new — an ancestor of Gestalt 'whole > parts'."},
+  {q:"The 'brick-wall' hypothesis (associated with James Mill) says ideas…", o:["Fuse into new wholes","Remain separate and fixed, stacked like bricks","Are innate","Disappear over time"], c:1, e:"Brick-wall: ideas stay distinct and simply pile up — an ancestor of behaviourist atomism."},
+  {q:"Coalescence is regarded as a conceptual ancestor of…", o:["Behaviourism","Gestalt psychology","Psychoanalysis","Eugenics"], c:1, e:"Because the whole becomes more than the sum of its parts, coalescence foreshadows Gestalt."},
+  {q:"The brick-wall view foreshadows which later movement's atomism?", o:["Gestalt psychology","Behaviourism","Humanism","Functionalism"], c:1, e:"Fixed, separable elements stacked together prefigure behaviourist S–R atomism."},
+  {q:"Broca's area is associated with…", o:["Speech production","Speech comprehension/meaning","Visual processing","Balance"], c:0, e:"Broca (1861) linked the left frontal area to speech production (patient 'Tan')."},
+  {q:"Broca's famous patient, who could understand but barely speak, was nicknamed…", o:["'Tan'","'H.M.'","'Phineas'","'Anna O.'"], c:0, e:"The patient could essentially only say 'tan' — production was lost while comprehension survived."},
+  {q:"Wernicke's area is associated with…", o:["Speech production","Speech comprehension/meaning","Motor coordination","Emotion"], c:1, e:"Wernicke linked a temporal-lobe region to comprehension/meaning of speech."},
+  {q:"Why did the medical evidence from Broca and Wernicke matter for psychology?", o:["It disproved the brain's role in mind","It gave replicable evidence for localisation of function","It showed the mind is immaterial","It ended the study of language"], c:1, e:"Replicable lesion–function links supported the idea that mind lives in brain and can be studied by natural science."},
+  {q:"A bag feels heavier when you add 0.2 kg to 1 kg, but adding 0.2 kg to 10 kg is unnoticeable. This best illustrates…", o:["Fechner's law","Weber's law (constant fraction)","The imageless-thought controversy","Reactivity"], c:1, e:"The detectable change scales with the baseline — a constant fraction — which is Weber's law."},
+  {q:"Fechner's psychophysical methods are seen as a precursor to which modern framework?", o:["Signal-detection theory","Psychoanalysis","Operant conditioning","Factor analysis"], c:0, e:"His forced-choice/threshold methods evolved into signal-detection theory."},
+  {q:"'Wundt was a structuralist' is considered a trap because…", o:["Wundt never ran experiments","Structuralism is Titchener's reading; Wundt emphasised active apperception/voluntarism","Wundt rejected all introspection","Structuralism came before Wundt"], c:1, e:"Titchener's elementalist structuralism distorts Wundt, whose system centred on active apperception (voluntarism)."},
+  {q:"In Wundt's system, 'apperception' differs from passive association in that it is…", o:["Automatic and attention-free","Active, intentional and attention-demanding","Purely physiological","Unconscious only"], c:1, e:"Apperception is the active, voluntary focusing of attention — the heart of Wundt's voluntarism."},
+  {q:"For Wundt, 'immediate' experience (the proper object of his science) refers to…", o:["Raw conscious experience itself","Experience filtered through prior knowledge","Cultural products","Reaction times only"], c:0, e:"Immediate experience = experience as directly given, versus 'mediate' experience interpreted via knowledge."},
+  {q:"Which three strands did Wundt fuse into scientific psychology?", o:["Psychoanalysis, behaviourism, Gestalt","Psychophysics, associationist philosophy, and neurophysiology/medicine","Astronomy, chemistry, biology","Sociology, economics, anthropology"], c:1, e:"Wundt braided psychophysics, the associationist tradition, and brain/nerve physiology into one discipline."},
+  {q:"Locke's empiricism is opposed to which view of ideas?", o:["Nativism (innate ideas)","Behaviourism","Functionalism","Positivism"], c:0, e:"Empiricism (knowledge from experience) opposes nativism, which holds some ideas are innate."},
+  {q:"Weber's and Fechner's achievement is best described as making predictions that are…", o:["Qualitative and vague","Quantitative and mathematical","Purely philosophical","Untestable"], c:1, e:"They produced numeric, lawful relationships — the model of 'real science' the new psychology pursued."},
+  {q:"The 'metatheory vs theory' distinction (from Hartley) teaches that…", o:["A theory is always right","A framework can be correct even if its specific mechanism is wrong","Metatheory is unscientific","Mechanisms never matter"], c:1, e:"Hartley's metatheory (mind = physical events) was sound even though his particle-vibration theory was false."},
+  {q:"The core claim of associationism is that complex ideas are formed by…", o:["Innate templates","Associating/combining simpler ideas or sensations","Divine illumination","Random firing"], c:1, e:"Associationism builds complex mental contents out of associated simple elements."},
+  {q:"Wundt's 'strategic compromise' meant that psychology would…", o:["Study everything by experiment","Restrict the lab to immediate/experimental processes and leave higher processes to Völkerpsychologie","Abandon experiments entirely","Only study animals"], c:1, e:"He limited experimental psychology to what 19th-century methods could handle, parking higher processes elsewhere."},
+  {q:"In Fechner's S = k·log R, what does R stand for?", o:["The response time","The physical stimulus intensity","The reliability coefficient","The number of observers"], c:1, e:"R is the stimulus (Reiz) intensity; S is the resulting sensation magnitude."},
+  {q:"Wundt is conventionally credited as the founder of…", o:["Psychoanalysis","Experimental (scientific) psychology","Behaviourism","Gestalt psychology"], c:1, e:"He is conventionally named the founder of experimental psychology via the 1879 Leipzig lab."},
+  {q:"Locke distinguished primary qualities (e.g. shape) from secondary qualities (e.g. colour). Secondary qualities…", o:["Exist in objects independently of perceivers","Depend on the perceiver's mind","Are the only real properties","Cannot be perceived"], c:1, e:"Secondary qualities (colour, taste) are perceiver-dependent — feeding the appearance/reality problem."},
+  {q:"That trained observers in different labs gave conflicting introspective reports most directly threatened psychology's claim to…", o:["Replicability/objectivity","Generosity","Creativity","Profitability"], c:0, e:"Without replicable, inter-subjective data, introspection couldn't anchor an objective science."},
+  {q:"The lesson behaviourism later drew from introspection's failure was to…", o:["Study only the unconscious","Keep only public stimulus and response, dropping the inner report","Use more introspection","Abandon experiments"], c:1, e:"If the inner report can't be made public/replicable, drop it and study observable S and R."},
+  {q:"Which pairing correctly matches a thinker with their idea?", o:["Locke — innate ideas","Fechner — logarithmic law of sensation","Hartley — brick-wall hypothesis","James Mill — coalescence"], c:1, e:"Fechner gave the logarithmic law; Locke = tabula rasa, Hartley = coalescence, James Mill = brick-wall."},
+  {q:"Weber's fraction being constant means that as baseline intensity rises, the absolute JND…", o:["Stays exactly the same","Gets larger proportionally","Drops to zero","Becomes negative"], c:1, e:"Because ΔI/I is constant, a larger I requires a larger absolute ΔI to be noticed."},
+  {q:"Helmholtz-style work and psychophysics gave Wundt's new psychology mainly a…", o:["Religious foundation","Measurable, experimental target for studying mind","Political agenda","Literary style"], c:1, e:"Measurable phenomena (sensation thresholds, timing) gave the lab something concrete to study."},
+  {q:"A researcher presents a controlled tone repeatedly and asks trained observers to report the elementary qualities of their sensation. This is an example of…", o:["Operant conditioning","Wundtian introspection / inner perception","Naturalistic observation","A randomised controlled trial"], c:1, e:"Controlled, repeatable stimulus + trained report of immediate experience is classic Wundtian introspection."},
+  {q:"Which best captures the difference between 'immediate' and 'mediate' experience?", o:["Immediate = raw sensation; mediate = experience interpreted through knowledge","They are identical","Immediate = cultural; mediate = physiological","Mediate = faster than immediate"], c:0, e:"Immediate experience is the raw given; mediate experience is filtered/interpreted via prior knowledge ('a brick')."},
+  {q:"J.S. Mill's notion of 'mental chemistry' shifted associationism toward which view?", o:["Brick-wall (separate elements)","Coalescence (elements fusing into new wholes)","Eliminativism","Dualism"], c:1, e:"Mill's 'mental chemistry' allowed ideas to combine into qualitatively new wholes — a coalescence-type move."},
+  {q:"Overall, psychophysics is the study of the relationship between…", o:["Physical stimuli and the sensations/perceptions they produce","Genes and behaviour","Society and the individual","Reflexes and glands"], c:0, e:"Psychophysics quantitatively links physical stimulus properties to psychological sensation."}
+];
+
+/* ===== THEME 2 — Schools & Paradigms (50) ===== */
+QUESTIONS.t2 = [
+  {q:"Franz Gall's phrenology was right about one thing and wrong about another. He was RIGHT that…", o:["Mental functions are localised in the brain","Skull bumps reveal character","The mind is immaterial","All regions do the same job"], c:0, e:"Gall correctly anticipated localisation of function, but his method (reading skull bumps) was wrong."},
+  {q:"Phineas Gage's 1848 injury was important because it suggested that…", o:["Memory lives in the cerebellum","The frontal lobes are involved in personality and social function","Vision is in the frontal lobe","The brain plays no role in behaviour"], c:1, e:"A tamping iron through his prefrontal cortex left intellect intact but changed his personality."},
+  {q:"Hermann von Helmholtz contributed which key measurement to the new psychology?", o:["The speed of nerve conduction","The boiling point of blood","The IQ score","The reinforcement schedule"], c:0, e:"Helmholtz measured nerve conduction speed, showing mental/neural events take measurable time."},
+  {q:"Helmholtz described perception as a process of…", o:["Direct realism","Unconscious inference","Pure introspection","Random guessing"], c:1, e:"For Helmholtz we unconsciously infer the world from sensory cues — a form of indirect realism."},
+  {q:"Donders' 'method of subtraction' measures the duration of a mental stage by…", o:["Subtracting the RT of a simpler task from a more complex one","Adding two reaction times","Counting neurons","Averaging error rates"], c:0, e:"The extra stage's duration = RT(complex task) − RT(task lacking that stage)."},
+  {q:"A key assumption of Donders' subtraction method is that mental stages are…", o:["Parallel and overlapping","Serial and deletable (pure insertion)","Random","Non-existent"], c:1, e:"It assumes stages are arranged serially and can be cleanly inserted/deleted without affecting others."},
+  {q:"Francis Galton is best known for pioneering the study of…", o:["Operant conditioning","Individual differences and correlation","Classical conditioning","Phrenology"], c:1, e:"Galton founded the individual-differences tradition and originated correlation and regression-to-the-mean ideas."},
+  {q:"Galton's tradition is the opposite pole to Wundt's because Galton sought…", o:["General laws of the typical mind","How individuals differ from one another","To ban measurement","Cultural products"], c:1, e:"Wundt hunted general laws; Galton studied variation between individuals — differential psychology."},
+  {q:"A troubling part of Galton's legacy is that he founded…", o:["Eugenics","Behaviour therapy","Psychoanalysis","Gestalt psychology"], c:0, e:"Galton coined and promoted eugenics — the dark side of his differential program."},
+  {q:"Alfred Binet (with Simon) created, in 1905, the first practical…", o:["Personality inventory","Intelligence test to identify pupils needing help","Lie detector","Projective test"], c:1, e:"Binet's scale aimed to identify schoolchildren needing extra support, introducing 'mental age'."},
+  {q:"Binet's aim differed from Galton's framing in that Binet's test was…", o:["Eugenic in purpose","Applied and remedial (to help children)","Designed to rank races","Purely theoretical"], c:1, e:"Binet's purpose was practical help for struggling pupils, not eugenic selection."},
+  {q:"William James's Principles of Psychology emphasised the…", o:["Stream of consciousness","Reflex arc only","Skull morphology","Unconscious id"], c:0, e:"James described consciousness as a continuous 'stream', opposing structuralist element-by-element analysis."},
+  {q:"James is associated with which philosophical position about truth?", o:["Correspondence realism","Pragmatism ('truth is what works')","Eliminativism","Substance dualism"], c:1, e:"James championed pragmatism: ideas are 'true' insofar as they work."},
+  {q:"Hugo Münsterberg helped found which applied field?", o:["Forensic / industrial-organisational psychology","Psychoanalysis","Gestalt psychology","Behaviour genetics"], c:0, e:"Münsterberg applied experimental psychology to law (eyewitnessing) and the workplace (I-O)."},
+  {q:"Lightner Witmer is credited with founding…", o:["The first clinical psychology clinic (1896)","The first IQ test","Behaviourism","Phrenology"], c:0, e:"Witmer opened the first psychological clinic and coined 'clinical psychology'."},
+  {q:"Structuralism (Titchener) asks primarily…", o:["What is consciousness FOR?","What is consciousness MADE OF?","How do animals learn?","How fast is a nerve?"], c:1, e:"Structuralism analyses consciousness into its elemental sensations — its composition."},
+  {q:"Functionalism (James, Dewey) asks primarily…", o:["What is consciousness made of?","What is consciousness FOR (its adaptive function)?","How big is the skull?","What colour is an afterimage?"], c:1, e:"Functionalism, Darwin-influenced, asks what mental processes do for the organism."},
+  {q:"The structuralism-vs-functionalism split also maps onto which contrast?", o:["European 'pure' science vs American 'applied' science","Ancient vs modern","Physics vs chemistry","Nature vs nurture"], c:0, e:"Structuralism = European/pure; functionalism = American/applied — pure vs applied psychology."},
+  {q:"'Titchener's structuralism is just Wundt's system' is a trap because…", o:["Titchener faithfully copied Wundt","Structuralism distorts Wundt, who emphasised active apperception, not passive elements","Wundt was American","Titchener rejected introspection"], c:1, e:"Titchener's passive elementalism misrepresents Wundt's voluntarism/apperception."},
+  {q:"Edward Thorndike studied learning using…", o:["Puzzle boxes and learning curves with cats","Dream analysis","Skull measurement","Verbal reports only"], c:0, e:"Thorndike plotted gradual learning curves from cats escaping puzzle boxes."},
+  {q:"Thorndike's Law of Effect states that responses followed by a satisfying state are…", o:["Weakened","'Stamped in' (strengthened)","Unaffected","Forgotten instantly"], c:1, e:"Satisfying consequences stamp in a response; annoying ones stamp it out — the seed of operant conditioning."},
+  {q:"Thorndike's 'connectionism' viewed learning as…", o:["Sudden insight","Gradual strengthening of stimulus-response bonds","Innate reflexes only","Imitation of humans"], c:1, e:"Learning = mechanical, gradual strengthening of S–R bonds, no insight required."},
+  {q:"Watson's 1913 'behaviourist manifesto' declared psychology should be…", o:["The science of the unconscious","The purely objective science of behaviour, dropping consciousness/introspection","A branch of philosophy","The study of qualia"], c:1, e:"Watson jettisoned consciousness and introspection in favour of objective behaviour."},
+  {q:"For Skinner, mentalistic terms like 'will' or 'drive' are 'explanatory fictions' because they…", o:["Are mathematically precise","Merely re-name the behaviour and explain nothing (they are circular)","Predict behaviour perfectly","Are based on brain scans"], c:1, e:"Saying 'he eats because he's hungry' just renames the behaviour — circular, not explanatory."},
+  {q:"Instead of inner causes, Skinner sought lawful…", o:["Functional relations between observable stimuli, responses and reinforcement","Soul-states","Innate ideas","Astrological correlations"], c:0, e:"Skinner studied functional S–R–reinforcement relations rather than positing hidden inner causes."},
+  {q:"Skinner acknowledged a philosophical debt to which positivist?", o:["Ernst Mach","René Descartes","Immanuel Kant","Thomas Aquinas"], c:0, e:"Mach's view (describe relations, avoid hidden causes) shaped Skinner's anti-mentalism."},
+  {q:"Which is a genuine contribution of Skinner?", o:["The Oedipus complex","Operant conditioning and schedules of reinforcement","Phrenology","The IQ ratio"], c:1, e:"Skinner contributed operant conditioning, the Skinner box, reinforcement schedules, shaping, and applied behaviour analysis."},
+  {q:"'Shaping' in Skinner's work refers to…", o:["Carving the skull","Reinforcing successive approximations to a target behaviour","Drawing learning curves","Measuring nerves"], c:1, e:"Shaping builds complex behaviour by reinforcing closer and closer approximations."},
+  {q:"Neobehaviourism (Hull, Tolman) differed from radical behaviourism by…", o:["Banning all measurement","Re-admitting unobservable 'intervening variables'","Rejecting experiments","Studying only humans"], c:1, e:"Neobehaviourists allowed intervening variables between stimulus and response."},
+  {q:"Clark Hull's theory was best described as…", o:["Purposive and cognitive","Mechanistic and hypothetico-deductive (deriving behaviour from equations)","Mystical","Anti-mathematical"], c:1, e:"Hull built a grand mathematical system (e.g. sEr = sHr × D × K …) to derive behaviour."},
+  {q:"Hull's grand quantitative system is generally judged to have…", o:["Succeeded completely","Failed — too many parameters, didn't generalise","Never been tested","Been adopted unchanged today"], c:1, e:"Hull's unwieldy system collapsed under its own complexity ('Hull's failed system')."},
+  {q:"Tolman's 'purposive behaviourism' held that behaviour is…", o:["Blind and mechanical","Goal-directed and guided by cognitive maps/expectancies","Purely reflexive","Innate only"], c:1, e:"Tolman argued behaviour 'reeks of purpose' and is guided by internal cognitive maps."},
+  {q:"Tolman's 'latent learning' experiments showed that…", o:["Reinforcement is always required for learning","Rats can learn a maze without reward (learning ≠ performance)","Cats cannot learn","Learning is impossible without language"], c:1, e:"Unrewarded rats still learned the maze layout, dissociating learning from performance and from reinforcement."},
+  {q:"In neobehaviourism, Hull's intervening variables were framed as ___ while Tolman's were ___.", o:["cognitive; physiological","physiological (drive, habit); cognitive (maps, expectancies)","spiritual; chemical","identical","random; fixed"], c:1, e:"Hull's were physiological-style quantities; Tolman's were frankly cognitive."},
+  {q:"Chomsky's 1959 critique attacked which Skinner book?", o:["Walden Two","Verbal Behavior","Beyond Freedom and Dignity","The Behavior of Organisms"], c:1, e:"Chomsky reviewed Verbal Behavior, arguing reinforcement can't explain language."},
+  {q:"Chomsky's 'poverty of the stimulus' argument claims that…", o:["Children get too little/too noisy input to learn grammar by reinforcement","Stimuli are too strong","Poverty causes language delay","Animals lack stimuli"], c:0, e:"The linguistic input is too impoverished for reinforcement to explain rich grammatical competence."},
+  {q:"Chomsky's 'generativity/productivity' argument notes that speakers…", o:["Only repeat memorised sentences","Produce and understand endless novel sentences never reinforced","Cannot form new sentences","Speak only when rewarded"], c:1, e:"We generate unlimited novel sentences, which simple reinforcement histories can't account for."},
+  {q:"Chomsky's positive proposal was an innate…", o:["Reflex arc","Language faculty / universal grammar","Drive-reduction system","Collective unconscious"], c:1, e:"He posited an innate language faculty (universal grammar), helping trigger the cognitive revolution."},
+  {q:"The cognitive paradigm differs from behaviourism mainly by allowing…", o:["No experiments","Internal representations and inference to unobservable processes","Only animal subjects","Only introspection"], c:1, e:"Cognitivism reopens the 'black box': representations, memory, attention — disciplined by experiment (e.g. RT)."},
+  {q:"The information-processing model describes the mind as a sequence of…", o:["Reflexes only","Input → encoding → storage → retrieval → output","Glandular secretions","Random impulses"], c:1, e:"Cognition is modelled as stages through which information is processed."},
+  {q:"In the computer metaphor, mind is to brain as…", o:["Software is to hardware","Fuel is to engine","Map is to territory","Water is to pipe"], c:0, e:"Mind:brain :: software:hardware — the analogy behind functionalism in philosophy of mind."},
+  {q:"The claim 'the mind literally IS a computer' is, per the course, best treated as…", o:["A proven fact","A misconception — the computer is a model/metaphor, not an identity","An endorsement by all cognitivists","Irrelevant"], c:1, e:"The computer is offered as a model/metaphor; reading it as literal identity is a misconception."},
+  {q:"'Control systems' / cybernetics contributed which idea to cognitive psychology?", o:["The reflex arc","Feedback-regulated, goal-seeking loops (e.g. the TOTE unit)","Phrenology","Drive reduction"], c:1, e:"Wiener's cybernetics replaced the reflex arc with self-correcting feedback loops (Test–Operate–Test–Exit)."},
+  {q:"The overall paradigm sequence of Theme 2 is…", o:["Cognitive → behaviourism → Thorndike","Thorndike → Watson/Skinner → Hull/Tolman → cognitive revolution","Freud → Skinner → Galton","Gestalt → Wundt → James"], c:1, e:"Precursor (Thorndike) → radical behaviourism → neobehaviourism → the cognitive turn."},
+  {q:"Which trap pairs the correct distinction for Thorndike?", o:["Law of Effect = repetition; Law of Exercise = consequences","Law of Effect = consequences (kept); Law of Exercise = mere repetition (retracted)","Both are about reinforcement schedules","Neither was Thorndike's"], c:1, e:"Effect (consequences) was retained; Exercise (repetition) was largely retracted by Thorndike."},
+  {q:"'William James' and 'James Mill' are an exam name-trap because…", o:["They are the same person","James = US functionalist/pragmatist; Mill = British brick-wall associationist","Both founded behaviourism","Both are fictional"], c:1, e:"Same surname, opposite ends of the syllabus — don't confuse them."},
+  {q:"Watson's behaviourism is often said to 'comply with' which philosophy-of-science demand?", o:["Verificationism's demand for observable, inter-subjective data","Idealism","Rationalism","Phrenology"], c:0, e:"Banning the private inner report and keeping public S–R satisfies the positivist demand for observables."},
+  {q:"A researcher finds rats that explored a maze unrewarded later solve it as fast as rewarded rats. This supports…", o:["Hull's drive theory","Tolman's latent learning / cognitive maps","Thorndike's Law of Exercise","Skinner's shaping"], c:1, e:"Unrewarded exploration producing fast later performance is Tolman's latent-learning result."},
+  {q:"Skinner's overall stance toward theorising about inner mechanisms was that…", o:["Hidden inner states must be posited","One should avoid hidden inner causes and study functional relations","Mathematics is useless","Only the unconscious matters"], c:1, e:"Skinner was anti-theoretical about inner states, preferring lawful functional descriptions."},
+  {q:"Which best states why the cognitive revolution is described as 'opening the black box'?", o:["It studies only behaviour's surface","It treats internal processing (memory, attention, encoding) as a legitimate object of study","It denies the brain exists","It rejects all behaviour data"], c:1, e:"Behaviourism kept the box closed; cognitivism studies the internal processing inside it."}
+];
+
+/* ===== THEME 3 — The Mind–Body Problem (50) ===== */
+QUESTIONS.t3 = [
+  {q:"'Ontology' is the branch of philosophy concerned with…", o:["What exists / the nature of being","How we know things","Moral duty","Beautiful objects"], c:0, e:"Ontology asks what exists (e.g. is there a mind-independent world?)."},
+  {q:"'Epistemology' is concerned with…", o:["What exists","The nature and justification of knowledge","Political power","The afterlife"], c:1, e:"Epistemology asks how, and how well, we can know things."},
+  {q:"Rationalism holds that important knowledge comes primarily from…", o:["Sense experience","Reason / the intellect","Divine revelation only","Random chance"], c:1, e:"Rationalists (Descartes, Leibniz) hold some knowledge is innate or reached by reason."},
+  {q:"Empiricism holds that knowledge comes primarily from…", o:["Innate ideas","Sense experience","Pure logic","Authority"], c:1, e:"Empiricists (Locke, Hume) ground knowledge in experience (tabula rasa)."},
+  {q:"Reductionism is the idea that a higher-level phenomenon can be…", o:["Explained by a lower level (e.g. psychology → neuroscience → physics)","Never explained","Explained only by God","Ignored"], c:0, e:"Reduction explains higher levels in terms of lower ones — a recurring theme of the course."},
+  {q:"The 'appearance vs reality' distinction concerns the gap between…", o:["Past and future","How things SEEM and how they ARE","Mind and matter only","Cause and effect"], c:1, e:"It marks the gap between how things appear to us and how they really are (e.g. Locke, Kant)."},
+  {q:"Westphal frames the mind–body problem as four propositions that are…", o:["All obviously true","Jointly inconsistent (you must deny one)","Meaningless","About ethics"], c:1, e:"The four can't all be true together, so every theory denies exactly one of them."},
+  {q:"Descartes' position on mind and body is…", o:["Substance dualism with interaction","Physicalism","Idealism","Parallelism"], c:0, e:"Descartes held two substances (mind, body) that causally interact."},
+  {q:"In Westphal's tetrad, Descartes' interactionism denies which proposition?", o:["Mind is nonphysical","Body is physical","Mind and body interact","Physical and nonphysical CANNOT interact"], c:3, e:"By insisting they DO interact, he denies the claim that physical and nonphysical can't interact."},
+  {q:"The classic objection to Descartes' interactionism is…", o:["The pairing/interaction problem (how can immaterial mind move matter?)","That bodies don't exist","That minds are physical","The problem of induction"], c:0, e:"Critics (Elisabeth, Gassendi) asked how a non-physical mind could causally push physical matter."},
+  {q:"Property dualism claims there is…", o:["Two substances","One (physical) substance but irreducible mental properties","No mind","No body"], c:1, e:"Property dualism: one physical substance bearing genuinely non-physical (phenomenal) properties."},
+  {q:"Property dualism is threatened by 'causal closure' because the mental properties may turn out to be…", o:["The only causes","Epiphenomenal (causally idle)","Physical after all","Nonexistent"], c:1, e:"If the physical is causally closed, extra mental properties seem to do no causal work — epiphenomenal."},
+  {q:"Parallelism claims that mind and body…", o:["Interact at the pineal gland","Do NOT interact but run in synchrony","Are identical","Don't exist"], c:1, e:"Parallelism denies interaction; the two simply run in parallel, like synced clocks."},
+  {q:"Leibniz's specific version of parallelism is called…", o:["Occasionalism","Pre-established harmony","Epiphenomenalism","Eliminativism"], c:1, e:"Leibniz: God set up a pre-established harmony in advance so the two never need to interact."},
+  {q:"Occasionalism (Malebranche/Geulincx) explains apparent mind-body coordination by appeal to…", o:["A pre-set harmony","God intervening on each occasion","Brain chemistry","Random chance"], c:1, e:"On occasionalism, God coordinates mind and body continuously, on every occasion."},
+  {q:"The difference between parallelism and occasionalism is that…", o:["Parallelism is physicalist","Parallelism is synced once in advance; occasionalism is synced continuously by God","They are identical","Occasionalism denies God"], c:1, e:"Leibniz: harmony set once; occasionalism: God acts on each occasion."},
+  {q:"Spinoza's double-aspect theory holds that mind and body are…", o:["Two substances","Two aspects/views of one and the same substance","Causally interacting","Illusions"], c:1, e:"For Spinoza, thought and extension are two aspects of a single substance — so nothing 'interacts'."},
+  {q:"Epiphenomenalism claims that mental states…", o:["Cause physical states but not vice versa","Are caused by the brain but cause nothing themselves","Don't exist","Are the only reality"], c:1, e:"Epiphenomenalism: brain → mind, but mind is a causally idle by-product (Huxley's steam-whistle)."},
+  {q:"A disturbing consequence of epiphenomenalism is that…", o:["The body cannot move","Your conscious thoughts are causally powerless","Physics is false","Brains don't exist"], c:1, e:"If mental states cause nothing, your thoughts and decisions do no causal work."},
+  {q:"Emergentism holds that mind…", o:["Is identical to the brain","Emerges from physical complexity as something novel yet causally efficacious","Does not exist","Precedes matter"], c:1, e:"Emergentism: novel mental properties arise from complex organisation and can act on the physical."},
+  {q:"A tension within emergentism is that wanting mind to be both novel AND causally efficacious…", o:["Solves everything","Re-opens the original interaction problem","Proves idealism","Disproves physics"], c:1, e:"If emergent mind acts on matter, the puzzle of how non-physical affects physical returns."},
+  {q:"Physicalism is the view that…", o:["Only physical things exist","Only minds exist","Two substances exist","Nothing exists"], c:0, e:"Physicalism (materialism): everything that exists is physical."},
+  {q:"Identity theory claims mental states are…", o:["Caused by brain states","Identical to brain states (like water = H₂O)","Independent of the brain","Fictional"], c:1, e:"Mind-brain identity theory: mental states just ARE brain states."},
+  {q:"'Type identity' theory claims that…", o:["Each individual mental event is some physical event, with no general law","Every TYPE of mental state equals a type of brain state","Minds are non-physical","Pain has no brain basis"], c:1, e:"Type identity posits type-to-type laws (e.g. pain = C-fibre firing)."},
+  {q:"'Token identity' (e.g. Davidson) claims that…", o:["Every type of mental state = a type of brain state","Each particular mental event is physical, but there are no type-type laws","The mind is immaterial","Mental events are uncaused"], c:1, e:"Token identity: each mental event is some physical event, but no lawful type-type mapping (anomalous monism)."},
+  {q:"The 'multiple realizability' argument is a problem mainly for…", o:["Token identity","Type identity (the same mental state can be realised in different physical systems)","Idealism","Dualism"], c:1, e:"If pain can occur in humans, octopuses and AI, there's no single brain-type — breaking type identity."},
+  {q:"Eliminative materialism (the Churchlands) claims that…", o:["Folk-psychological states should be reduced to brain states","There is no mind to reduce; folk psychology is a false theory to be eliminated","The mind is a separate substance","Beliefs are physical objects"], c:1, e:"Eliminativism says beliefs/desires are like phlogiston — a false theory future neuroscience will discard."},
+  {q:"Compared with identity theory, eliminative materialism is more radical because it…", o:["Keeps mental talk and reduces it","Deletes mental talk entirely rather than reducing it","Accepts dualism","Denies the brain"], c:1, e:"Identity theory reduces mental talk to brain talk; eliminativism eliminates it."},
+  {q:"Idealism / phenomenalism (Berkeley, Mach) holds that…", o:["Only matter exists","Bodies are reducible to actual/possible experiences; there is no mind-independent matter","Mind and body are two substances","The brain causes ideas"], c:1, e:"Idealism denies mind-independent matter — to be is to be perceived."},
+  {q:"In Westphal's tetrad, idealism denies which proposition?", o:["The mind is nonphysical","The body is physical","Mind and body interact","Nonphysical and physical can't interact"], c:1, e:"Idealism denies that the body is a physical (mind-independent) thing."},
+  {q:"An objection to idealism is that it struggles to explain…", o:["Why experiences are so regular and predictable","Why minds exist","Why mathematics works","Why brains are grey"], c:0, e:"If only experiences exist, why do they come in such orderly, law-like sequences?"},
+  {q:"'Qualia' refer to…", o:["Brain regions","The subjective 'what-it-is-like' quality of experience","Reaction times","Statistical errors"], c:1, e:"Qualia are the raw felt qualities of experience (e.g. the redness of red) — hard for physicalism."},
+  {q:"Ryle's 'category mistake' diagnoses dualism's error as…", o:["Treating the mind as a thing in the same category as the body","Denying the brain","Using too much maths","Believing in qualia"], c:0, e:"Ryle: dualism wrongly treats 'the mind' as an object like the body — touring colleges then asking to see 'the University'."},
+  {q:"Ryle's phrase 'the ghost in the machine' is a criticism of…", o:["Behaviourism","Cartesian substance dualism","Functionalism","Physics"], c:1, e:"He mocked Descartes' dualism as positing a 'ghost' (mind) inside the bodily 'machine'."},
+  {q:"Leibniz's 'pre-established harmony' is a version of which family?", o:["Interactionism","Parallelism","Physicalism","Eliminativism"], c:1, e:"Pre-established harmony is a parallelist (non-interaction) solution."},
+  {q:"Wundt's 'psychophysical parallelism' is best classified as…", o:["Substance dualism","A monist position (one substance, two causalities)","Cartesian interactionism","Idealism"], c:1, e:"Despite the name, Wundt's parallelism is monist — not two substances."},
+  {q:"Which proposition does physicalism/identity theory deny?", o:["The mind is nonphysical","The body is physical","Mind and body interact","Nonphysical and physical can't interact"], c:0, e:"Physicalism denies that the mind is a non-physical thing."},
+  {q:"Which proposition do parallelism and epiphenomenalism (in the strict sense) deny?", o:["The mind is nonphysical","The body is physical","Mind and body interact (symmetrically)","Nonphysical and physical can't interact"], c:2, e:"Both deny genuine two-way interaction between mind and body."},
+  {q:"The 'pairing problem' is a difficulty specifically for…", o:["Physicalism","Interactionist dualism","Idealism","Behaviourism"], c:1, e:"It asks why a given mind is paired with a given body if they are separate substances that interact."},
+  {q:"Substance dualism vs property dualism: the key difference is…", o:["Number of substances (two vs one)","Number of minds","Whether brains exist","Whether God exists"], c:0, e:"Substance dualism = two substances; property dualism = one substance, two kinds of property."},
+  {q:"Kant's contribution to the appearance/reality debate was that…", o:["We perceive things-in-themselves directly","Innate categories structure experience; we know phenomena, not the thing-in-itself","There is no reality","All knowledge is innate"], c:1, e:"Kant: the mind imposes categories; we access phenomena, never the noumenal thing-in-itself."},
+  {q:"Which theory says the cleanest solutions tend to be the least believable (Westphal's running thread)?", o:["That clean theories like eliminativism/idealism buy tidiness by denying something we strongly believe","That messy theories are always right","That dualism is proven","That physics is false"], c:0, e:"Westphal: cleanness correlates inversely with believability — clean views deny inner experience, mental causation, or the physical world."},
+  {q:"Token identity survives the multiple-realizability objection because it…", o:["Insists on type-type laws","Requires only that each event be physical, with no type-type law","Denies physicalism","Accepts dualism"], c:1, e:"Without committing to type-type laws, token identity isn't refuted by variable realisation."},
+  {q:"Which is an example of a qualia-based worry for physicalism?", o:["Predicting reaction times","Explaining the felt redness of red in purely physical terms","Measuring nerve speed","Counting neurons"], c:1, e:"The felt quality (quale) seems to resist exhaustive physical description."},
+  {q:"Ryle's behaviourist-leaning view treats mental terms as referring to…", o:["Inner ghostly objects","Dispositions to behave","Brain chemicals only","Nothing meaningful"], c:1, e:"Ryle analyses mind-talk as dispositions to behave, not as a hidden inner object."},
+  {q:"A scenario: 'Mental events are real and physical, but there is no law linking pain-as-a-type to one brain-type.' This is…", o:["Type identity","Token identity (anomalous monism)","Substance dualism","Idealism"], c:1, e:"Real physical events plus no type-type law = token identity."},
+  {q:"A scenario: 'God re-coordinates my will and my arm every time I move it.' This is…", o:["Epiphenomenalism","Occasionalism","Type identity","Emergentism"], c:1, e:"Continuous divine coordination on each occasion = occasionalism."},
+  {q:"A scenario: 'Mind and matter are two readings of one underlying reality.' This is…", o:["Double-aspect theory","Substance dualism","Eliminativism","Interactionism"], c:0, e:"One substance with two aspects = Spinoza's double-aspect theory."},
+  {q:"Reductionism appears across the course as a recurring 'dream'. In the mind–body context it shows up as…", o:["Idealism","Physicalism/identity theory (reducing mind to brain)","Parallelism","Dualism"], c:1, e:"Reducing the mental to the physical is the mind–body face of the unification/reduction impulse."},
+  {q:"Overall, the modern lesson from 'causal closure' is usually taken to favour…", o:["Interactionist dualism","Being a physicalist or a parallelist rather than an interactionist","Idealism","Occasionalism"], c:1, e:"Given the causal closure of the physical, the live options are physicalism or parallelism, not interaction."}
+];
+
+/* ===== THEME 4 — What Is Knowledge? (50) ===== */
+QUESTIONS.t4 = [
+  {q:"Nagel's view that science is 'organised common sense' means scientific knowledge differs from everyday knowledge in…", o:["Principle (a totally different kind)","Degree, not principle","Being always certain","Being unrelated to observation"], c:1, e:"Science is continuous with common sense — more systematic, but not a wholly different kind of knowing."},
+  {q:"Which three goals are most associated with scientific knowledge?", o:["Profit, fame, power","Unification, underlying causes, and reduction","Secrecy, dogma, tradition","Beauty, faith, intuition"], c:1, e:"Science seeks to unify, find underlying causes, and reduce higher levels to lower ones."},
+  {q:"Which is among the '6 characteristics' of scientific knowledge?", o:["Infallibility","Systematicity / well-defined methods / revisability","Secrecy","Appeal to authority"], c:1, e:"Hallmarks include systematicity, defined methods, objectivity, clarity, revisability, and reduction."},
+  {q:"That scientific claims are 'revisable' means they are…", o:["Never changed","Open to revision in light of new evidence","Decided by vote","Eternally fixed"], c:1, e:"Revisability — openness to correction — is a core feature distinguishing science from dogma."},
+  {q:"In the realism/idealism/pragmatism trio, REALISM says truth is…", o:["Coherence among beliefs","Correspondence to a mind-independent world","Whatever works","Whatever is popular"], c:1, e:"Realism: truth = correspondence between claims and an independent reality."},
+  {q:"IDEALISM/relativism about knowledge says truth is mainly a matter of…", o:["Correspondence to reality","Coherence within a system of beliefs/constructions","Practical success","Divine command"], c:1, e:"Idealist/constructivist views treat truth as coherence within a constructed framework."},
+  {q:"PRAGMATISM (the authors' preferred view) says knowledge is…", o:["A mirror of reality","Functional coping; truth = what works/succeeds","Innate","Meaningless"], c:1, e:"Pragmatism: knowledge is a tool for coping; 'true' beliefs are those that succeed."},
+  {q:"A problem for naïve realism is that any test of 'correspondence' is…", o:["Free of theory","Itself theory-laden (no God's-eye view)","Always decisive","Purely mathematical"], c:1, e:"We can't step outside our theories to compare them with bare reality — undermining simple correspondence."},
+  {q:"Deduction is an inference in which the conclusion…", o:["Goes beyond the premises","Is contained in the premises (certain, no new knowledge)","Is always false","Is merely probable"], c:1, e:"Valid deduction from true premises is certain but adds no new content."},
+  {q:"Induction is an inference that is…", o:["Certain and contentless","Probable and content-adding (instances → general claim)","Always invalid","Identical to deduction"], c:1, e:"Induction generalises from instances: probable, but it does extend knowledge."},
+  {q:"The 'problem of induction' (Hume) is that inductive inference…", o:["Is too slow","Has no deductive justification; the next case need not conform","Uses no data","Is banned in science"], c:1, e:"No amount of past instances logically guarantees the next case; appeals to 'uniformity of nature' beg the question."},
+  {q:"Quine's addition to the induction problem is that induction presupposes…", o:["Perfect measurement","Criteria of similarity ('same kind') that can't come from observation alone","Infinite data","A God's-eye view"], c:1, e:"To project from instances we must already judge what counts as 'the same kind' — itself non-observational."},
+  {q:"Abduction is…", o:["Deduction from axioms","Inference to the best explanation of an observation","Random guessing","Pure measurement"], c:1, e:"Abduction (Peirce) infers the most plausible explanation of the data; probable, rivals exist."},
+  {q:"'The streets are wet, so it probably rained.' This is an example of…", o:["Deduction","Induction","Abduction","A category mistake"], c:2, e:"Inferring the best explanation (rain) of an observation (wet streets) is abduction."},
+  {q:"'All observed swans are white, so all swans are white.' This is…", o:["Deduction","Induction","Abduction","Falsification"], c:1, e:"Generalising from observed instances to a universal claim is induction."},
+  {q:"The 'theory-ladenness of observation' claims that…", o:["Observation is pure and theory-free","'Facts' are statements held true, shaped by theory; data underdetermine theory","Theories are unnecessary","Only theories matter, not data"], c:1, e:"Observation is interpreted through theory, so the same data can fit rival theories (underdetermination)."},
+  {q:"Bacon's image of the scientist as a 'bee' collecting pure facts is criticised because…", o:["Bees don't exist","There is no theory-neutral fact-collection","Facts are always false","Bees can't fly"], c:1, e:"The course rejects pure 'bee-like' fact-gathering: observation is always theory-laden."},
+  {q:"A scientific 'law' differs from an accidental generalisation because a law…", o:["Has more words","Supports counterfactuals ('if x were P, it would be Q')","Is shorter","Is always about coins"], c:1, e:"'All coins in my pocket are silver' is accidental; a law would support counterfactual conditionals."},
+  {q:"An EMPIRICAL law refers to observables, whereas a THEORETICAL law…", o:["Refers to unobservables (e.g. genes) and is wider/unifying","Is always false","Cannot be tested","Refers only to coins"], c:0, e:"Empirical laws relate observables (Mendel's ratios); theoretical laws invoke unobservables (genes)."},
+  {q:"A 'model' in science is best described as…", o:["A perfect copy of reality","A mini-theory or analogy mediating between laws and phenomena","An accidental generalisation","A raw datum"], c:1, e:"Models are simplified analogies/mini-theories linking abstract laws to concrete phenomena."},
+  {q:"In the course's view, to predict a phenomenon and to explain it are…", o:["Completely unrelated","Structurally similar (both derive the phenomenon)","Opposites","Both impossible"], c:1, e:"On the deductive-nomological picture, prediction and explanation share the same logical structure."},
+  {q:"Hume's analysis of causation says we observe…", o:["Necessary connection directly","Constant conjunction plus a felt habit of expectation","Nothing at all","Final causes"], c:1, e:"Hume: we see regular succession and feel an expectation, but never observe necessity itself."},
+  {q:"Across the course, the concept of cause is progressively tightened. The most modern version (Woodward) defines a cause as…", o:["A constant conjunction","A point of intervention (what an experiment would change)","A divine act","An accidental correlate"], c:1, e:"Woodward's interventionism: X causes Y if intervening on X changes Y — the bridge to experiments."},
+  {q:"The empirical cycle (De Groot) runs roughly…", o:["Report → analyse → design","Observe → induce/abduce → deduce → test → evaluate","Guess → publish → forget","Measure → measure → measure"], c:1, e:"Observation → hypothesis → predictions → test → evaluation, then loop."},
+  {q:"The empirical cycle shows that science needs…", o:["Only deduction","Only induction","Both induction and deduction (they are complementary)","Neither"], c:2, e:"Hypotheses are induced/abduced; predictions are deduced and tested — both are indispensable."},
+  {q:"Merton's CUDOS norm of 'Communism' (communalism) means…", o:["Political communism","Scientific findings are shared common property","Secrecy of results","Private ownership of data"], c:1, e:"Communalism: results belong to the community, not the individual."},
+  {q:"The 'U' in CUDOS, Universalism, means claims should be judged by…", o:["The status of the claimant","Impersonal criteria, not who made them","Popularity","Funding source"], c:1, e:"Universalism: evaluate claims on merit, regardless of the scientist's identity."},
+  {q:"'Organized skepticism' (the S in CUDOS) means scientists should…", o:["Accept claims on authority","Suspend judgement until evidence is examined","Never doubt their mentor","Avoid criticism"], c:1, e:"Organized skepticism: subject all claims to critical scrutiny before acceptance."},
+  {q:"Mitroff's 'counternorms' (secrecy, dogmatism, self-interest) show that…", o:["Scientists never follow CUDOS","Real science runs on a tension between norms and counternorms","CUDOS is false","Science has no norms"], c:1, e:"Mitroff observed scientists also exhibit counternorms; science works through the tension between both."},
+  {q:"'Disinterestedness' (the D in CUDOS) means a scientist should…", o:["Be bored","Act without personal stake in the outcome","Hide data","Defend their own theory at all costs"], c:1, e:"Disinterestedness: no personal/financial stake should bias the evaluation of claims."},
+  {q:"The distinction between everyday and scientific knowledge is best summarised as one of…", o:["Kind","Degree of systematicity, rigour and method","Morality","Age"], c:1, e:"Scientific knowledge is everyday knowledge made systematic and rigorous — a difference of degree."},
+  {q:"Which is a valid deductive argument's key virtue?", o:["It adds new empirical content","If the premises are true and it's valid, the conclusion MUST be true","It is always probable","It needs no premises"], c:1, e:"Deductive validity guarantees a true conclusion given true premises — but no new content."},
+  {q:"Underdetermination of theory by data means that…", o:["Data fix exactly one theory","More than one theory can fit the same data","Theories need no data","Data are always wrong"], c:1, e:"Because observation is theory-laden, the same evidence can be consistent with rival theories."},
+  {q:"In INUS / Mackie's analysis, a cause is…", o:["A sufficient and necessary condition by itself","An Insufficient but Non-redundant part of an Unnecessary but Sufficient condition","A divine act","A constant conjunction only"], c:1, e:"Mackie refined causation as an INUS condition — part of a complex of conditions."},
+  {q:"Which best states why Woodward's interventionism matters for psychology methods?", o:["It bans experiments","It makes the experiment the very meaning of 'cause', justifying RCTs","It proves correlation = causation","It rejects causation"], c:1, e:"If a cause just is what an intervention would change, then manipulating variables (RCT) is how you find causes."},
+  {q:"A theoretical law is said to be more powerful than an empirical law because it…", o:["Is shorter","Unifies many empirical regularities by invoking unobservable structure","Avoids testing","Is about observables only"], c:1, e:"By appealing to underlying unobservables, theoretical laws explain and unify many empirical patterns."},
+  {q:"The pragmatist response to the problem of induction is essentially that…", o:["Induction is logically certain","Demanding a logical guarantee is asking too much; what matters is that it works","Induction should be abandoned","Only deduction is allowed"], c:1, e:"Pragmatists accept induction lacks a deductive guarantee but defend it by its practical success."},
+  {q:"Which of these is NOT one of science's stated aims in this theme?", o:["Unification","Finding underlying causes","Reduction","Maximising secrecy"], c:3, e:"Secrecy is a counternorm; science aims at unification, underlying causes and reduction."},
+  {q:"A hypothesis in the empirical cycle is generated by ___ and tested by deriving ___.", o:["deduction; observations","induction/abduction; testable predictions","measurement; nothing","authority; dogma"], c:1, e:"Hypotheses come from induction/abduction; predictions are deduced and then tested."},
+  {q:"Why is 'pure observation' called a myth in this theme?", o:["Because observation is impossible","Because what we count as facts is shaped by theory","Because scientists never observe","Because data don't exist"], c:1, e:"Facts are theory-laden statements, so observation is never wholly theory-neutral."},
+  {q:"Reduction is described as the 'most distinctive' feature of scientific knowledge because it…", o:["Makes science shorter","Explains a higher level by a lower one, enabling unification","Avoids mathematics","Is unique to psychology"], c:1, e:"Reductive explanation (psychology → neuroscience → physics) is a hallmark of the scientific drive to unify."},
+  {q:"Deduction vs induction, in one line: deduction is ___; induction is ___.", o:["probable, new; certain, contentless","certain but contentless; probable but content-adding","both certain; both probable","both invalid","random; fixed"], c:1, e:"Deduction: certain, no new knowledge. Induction: probable, adds knowledge."},
+  {q:"The claim 'correlation does not establish causation' connects this theme to which idea of cause?", o:["That causes need covariation PLUS exclusion of alternatives/precedence","That correlation is meaningless","That causes are divine","That nothing causes anything"], c:0, e:"Covariation (correlation) is necessary but not sufficient; precedence and exclusion of alternatives are also needed."},
+  {q:"Which scenario illustrates theory-ladenness?", o:["Two scientists with different theories 'see' different things in the same X-ray","A thermometer reading 20°C","Counting people in a room","Measuring a table with a ruler"], c:0, e:"When prior theory shapes what observers perceive in identical data, observation is theory-laden."},
+  {q:"An 'accidental generalisation' fails to be a law because it…", o:["Is too long","Does not support counterfactuals","Uses numbers","Mentions coins"], c:1, e:"True-but-accidental universals don't sustain 'if it were…' counterfactuals, so they aren't laws."},
+  {q:"The empirical cycle is described as the same skeleton as which methods sequence?", o:["Operationalize → design → analyse → report","Buy → sell → trade","Read → write → speak","Sleep → eat → repeat"], c:0, e:"Observe→hypothesise→deduce→test→evaluate parallels operationalize→design→analyse→report."},
+  {q:"Which pairing is correct?", o:["Peirce — abduction","Hume — falsifiability","Merton — interactionism","Nagel — eugenics"], c:0, e:"Peirce named abduction; Hume is induction/causation; falsifiability is Popper; CUDOS is Merton."},
+  {q:"A 'theoretical term' such as 'electron' is linked to observation via…", o:["Correspondence rules","Divine revelation","Pure intuition","Random assignment"], c:0, e:"On the standard view, correspondence rules tie unobservable theoretical terms to observable consequences."},
+  {q:"Why does the course treat scientific objectivity as an aspiration rather than a guarantee?", o:["Because scientists are dishonest","Because theory-ladenness and human bias always shape observation","Because objectivity is illegal","Because data are perfect"], c:1, e:"Given theory-ladenness and bias, objectivity is something procedures strive toward, not a given."},
+  {q:"Overall, Theme 4 sets up the rest of the course by showing that knowledge rests on inference that is…", o:["Always certain","Fallible and theory-laden, making the philosophy of science necessary","Purely deductive","Impossible"], c:1, e:"Because justification is fallible and theory-laden, we need an account of how science works (Themes 5–7)."}
+];
+
+/* ===== THEME 5 — Philosophy of Science (50) ===== */
+QUESTIONS.t5 = [
+  {q:"The 'demarcation problem' is the question of how to distinguish…", o:["Good from bad scientists","Science from non-science / pseudo-science","Maths from logic","Theory from model"], c:1, e:"Demarcation asks what separates genuine science from pseudo-science."},
+  {q:"Comte's law of three stages runs…", o:["Positive → metaphysical → theological","Theological → metaphysical → positive","Metaphysical → positive → theological","Random order"], c:1, e:"Comte: thought progresses from theological to metaphysical to the positive (observational) stage."},
+  {q:"Mach's phenomenalism holds that the world fundamentally consists of…", o:["Atoms in the void","Sensations / 'elements'","Numbers","Souls"], c:1, e:"For Mach, science describes relations among sensations; theoretical entities are economical summaries."},
+  {q:"The logical positivists' 'verifiability theory of meaning' says a statement is meaningful only if…", o:["It is falsifiable","It can be verified by observation (or is analytic)","It is popular","It is published"], c:1, e:"Verificationism: meaning = method of empirical verification; unverifiable metaphysics is 'meaningless'."},
+  {q:"On the verifiability criterion, the statement 'the Absolute is perfect' is…", o:["A scientific law","Literally meaningless (unverifiable)","An empirical fact","A falsifiable claim"], c:1, e:"Unverifiable metaphysical statements were dismissed as cognitively meaningless."},
+  {q:"In the 'Standard View', unobservable theoretical terms (e.g. electron) connect to observation via…", o:["Correspondence rules","Divine revelation","Falsification","Random sampling"], c:0, e:"Correspondence rules link theoretical terms to observable consequences."},
+  {q:"A core assumption of positivism that later proved fatal was that…", o:["Observation can be theory-free","Theories matter more than data","Mathematics is useless","Science is cumulative — wait, that too"], c:0, e:"Positivism assumed theory-neutral observation — exactly what theory-ladenness undermines."},
+  {q:"Positivists held that scientific progress is…", o:["Revolutionary and discontinuous","Cumulative (knowledge steadily accumulates)","Impossible","Circular"], c:1, e:"On the standard view, science accumulates truths steadily — a view Kuhn later attacked."},
+  {q:"The positivists kept only the 'context of justification' and dismissed the 'context of discovery' as…", o:["The heart of science","Mere psychology, not logic","Illegal","More important than justification"], c:1, e:"Discovery (how you got the idea) was deemed psychological; only justification (does it hold up?) counted."},
+  {q:"Which thinker argued meaning is 'use' in a language game, undermining a fixed verification criterion?", o:["Early Wittgenstein","Late Wittgenstein","Popper","Comte"], c:1, e:"The later Wittgenstein tied meaning to use, eroding a single timeless criterion of meaning."},
+  {q:"Sellars's 'myth of the given' attacks the idea that…", o:["There are infallibly known foundational observations","Theories exist","Science progresses","Numbers are real"], c:0, e:"Sellars denied any self-justifying 'given' observation immune to theory."},
+  {q:"Quine's 'two dogmas of empiricism' attacked the analytic/synthetic distinction and championed…", o:["Foundationalism","Holism (beliefs face evidence as a corporate body)","Verificationism","Phrenology"], c:1, e:"Quine: our beliefs meet experience collectively, so no statement is tested in isolation."},
+  {q:"Hanson's point that Tycho and Kepler watching dawn 'don't see the same thing' illustrates…", o:["Colour blindness","Theory-ladenness of observation","Verification","Falsification"], c:1, e:"Their differing theories shape their perception — observation is theory-laden."},
+  {q:"The Duhem–Quine thesis (underdetermination) implies that when a prediction fails…", o:["The core theory must be false","You can always save the theory by adjusting auxiliary assumptions","Science is impossible","Data are irrelevant"], c:1, e:"A failed test never falsifies one statement uniquely; blame can be shifted among auxiliaries."},
+  {q:"Popper rejected verification in favour of…", o:["Falsifiability","Confirmation","Authority","Induction"], c:0, e:"Popper: theories can't be verified by induction but can be falsified — falsifiability demarcates science."},
+  {q:"Popper's logic of falsification uses which valid inference form?", o:["Affirming the consequent","Modus tollens (if T→P, and not-P, then not-T)","Induction","Abduction"], c:1, e:"One disconfirming observation lets you deductively reject the theory via modus tollens."},
+  {q:"For Popper, Marxism and Freudian theory are pseudo-science because they…", o:["Use mathematics","Are unfalsifiable — they explain everything post hoc","Make risky predictions","Are too narrow"], c:1, e:"They can accommodate any outcome, so nothing could refute them — the mark of pseudo-science."},
+  {q:"Popper's 'critical attitude' means a scientist should…", o:["Defend their theory at all costs","Actively seek to refute their own theories","Avoid testing","Trust authority"], c:1, e:"The critical (vs dogmatic) attitude is to hold theories tentatively and hunt for refutations."},
+  {q:"For Popper, a 'good' theory is one that…", o:["Forbids a lot (is highly falsifiable)","Is vague enough to fit anything","Is never tested","Is most popular"], c:0, e:"Bold theories that forbid much are more falsifiable and thus more scientific."},
+  {q:"A standard objection to naïve falsificationism is that…", o:["Theories can't be tested","Scientists rescue theories with ad hoc auxiliary hypotheses; and theory-ladenness means no neutral falsifier","Falsification is illegal","Modus tollens is invalid"], c:1, e:"In practice scientists add ad hoc rescues, and theory-laden 'facts' can't cleanly refute theories."},
+  {q:"Kuhn's key unit of analysis is the…", o:["Research programme","Paradigm","Falsifier","Correspondence rule"], c:1, e:"A paradigm bundles theory, worldview, methods and exemplars."},
+  {q:"In Kuhn's model, 'normal science' is characterised by…", o:["Constant revolution","Puzzle-solving within an accepted paradigm","Rejecting the paradigm","Pure falsification"], c:1, e:"Normal science is conservative puzzle-solving guided by the reigning paradigm."},
+  {q:"Kuhn's sequence of scientific development is…", o:["Normal → crisis → revolution → new normal science","Revolution → normal → crisis only once","Crisis → cumulation","There is no sequence"], c:0, e:"Pre-paradigm → normal science → crisis (anomalies) → revolution → new normal science."},
+  {q:"'Incommensurability' (Kuhn) means competing paradigms…", o:["Can be ranked by a neutral measure","Share no fully neutral standard/observation language for comparison","Are identical","Always agree"], c:1, e:"Rival paradigms lack a shared neutral yardstick, so comparison is partly a 'Gestalt switch'."},
+  {q:"A consequence of incommensurability is that across revolutions, progress is…", o:["Straightforwardly cumulative","Not simply cumulative; the world is 'seen differently'","Impossible","Always backwards"], c:1, e:"Kuhn denied simple cross-revolution accumulation of truth."},
+  {q:"The clash between Popper and Kuhn over dogmatism is that…", o:["Both praise dogmatism","Popper sees dogmatism as the sin; Kuhn sees dogmatic 'normal science' as productive","Both reject dogmatism equally","Neither discusses it"], c:1, e:"For Popper dogmatism is unscientific; for Kuhn dogmatic puzzle-solving is how normal science advances."},
+  {q:"Lakatos's unit, the 'research programme', consists of…", o:["A hard core plus a protective belt of auxiliary hypotheses","A single falsifiable law","A paradigm only","A correspondence rule"], c:0, e:"A programme has an unfalsifiable hard core shielded by adjustable auxiliaries."},
+  {q:"For Lakatos, a research programme is 'progressive' if it…", o:["Only patches anomalies post hoc","Predicts and corroborates NOVEL facts","Avoids prediction","Never changes"], c:1, e:"Progressive programmes anticipate novel facts later confirmed; degenerating ones merely accommodate."},
+  {q:"A 'degenerating' research programme is one that…", o:["Predicts new facts","Only makes ad hoc adjustments to cover known anomalies","Is highly falsifiable","Wins the competition"], c:1, e:"Degeneration = post-hoc patching with no novel predictions."},
+  {q:"For Lakatos, the 'empirical content' of a theory is…", o:["The number of its supporters","The set of observations it forbids (its potential falsifiers)","Its mathematical beauty","Its age"], c:1, e:"More empirical content = more forbidden observations = bolder, more falsifiable, better."},
+  {q:"'More empirical content' is desirable because it makes a theory…", o:["Vaguer","Bolder and more falsifiable (so more informative)","Unfalsifiable","Older"], c:1, e:"A theory that forbids more says more about the world and risks more — a virtue for Popper and Lakatos."},
+  {q:"Feyerabend's 'epistemological anarchism' is summarised by the slogan…", o:["'Publish or perish'","'Anything goes'","'Verify everything'","'Falsify or die'"], c:1, e:"Feyerabend argued no fixed method rules apply across all science — 'anything goes'."},
+  {q:"Verifiability vs falsifiability: the key contrast is…", o:["Both rely on induction","Verification proves a universal true; falsification can only refute it","They are identical","Falsification confirms theories"], c:1, e:"You can never verify a universal law, but a single counter-instance can refute it (Popper)."},
+  {q:"The demarcation debate has a concrete historical consequence in psychology: it justified Wundt's exclusion of…", o:["Reaction times","The paranormal / unfalsifiable 'universal soul'","Sensation","The brain"], c:1, e:"To be a science, the new psychology broke with the unfalsifiable paranormal — a demarcation move."},
+  {q:"Which best states the 'standard view' of explanation?", o:["Explanation is storytelling","Deductive-nomological: explain by deducing the event from laws + conditions","Explanation is impossible","Explanation = correlation"], c:1, e:"The covering-law (D-N) model explains an event by deriving it from laws plus initial conditions."},
+  {q:"The four 'problems of positivism' all converge on which underlying issue?", o:["Mathematics is unreliable","Observation is not theory-neutral / independent","Scientists are dishonest","Funding is scarce"], c:1, e:"Wittgenstein, Sellars, Quine and Hanson all undercut the assumption of theory-free, independent observation."},
+  {q:"Kuhn's claim that 'paradigms make their data' is closest to which earlier idea?", o:["Verificationism","Theory-ladenness of observation","Falsifiability","Cumulative progress"], c:1, e:"If the paradigm shapes what counts as data, observation is theory-laden."},
+  {q:"Lakatos is often read as trying to rescue ___ from Kuhn's relativism.", o:["Dogmatism","The rationality of theory choice","Verificationism","Phrenology"], c:1, e:"Lakatos sought objective (if retrospective) criteria — progressive vs degenerating — to keep science rational."},
+  {q:"Popper allows a limited role for dogmatism because…", o:["Theories should never be tested","You need to hold a theory firmly enough to give it a fair test","Confirmation is the goal","Falsification is impossible"], c:1, e:"A dose of tenacity lets a theory be developed and tested, but science must remain ultimately self-critical."},
+  {q:"Which sequence correctly orders the demarcation saga?", o:["Falsifiability → verifiability → paradigms","Verifiability → falsifiability → paradigms → 'anything goes'","Paradigms → verifiability → falsifiability","Anything goes → verifiability"], c:1, e:"Vienna Circle verification → Popper falsification → Kuhn paradigms → Feyerabend anarchism."},
+  {q:"Mach's influence is most directly visible in which psychologist's anti-mentalism?", o:["Freud","Skinner","Galton","Binet"], c:1, e:"Skinner credited Mach: describe functional relations, avoid hidden inner causes."},
+  {q:"On the standard (positivist) view, the aim of unifying all sciences meant reducing them to…", o:["Biology","The language of physics","Psychology","Sociology"], c:1, e:"The unity-of-science programme sought reduction to a single physical language."},
+  {q:"Which is a good example of a Popperian 'risky prediction'?", o:["'Something will happen tomorrow'","Eddington's 1919 test of light-bending by the sun","'People are sometimes anxious'","'The Absolute is perfect'"], c:1, e:"A risky prediction forbids many outcomes and could easily fail — like the light-bending eclipse test."},
+  {q:"Critical vs dogmatic thinking maps onto which exam-relevant pair?", o:["Science (seek refutation) vs pseudo-science/Kuhn's normal science (confirm & immunise)","Induction vs deduction","Realism vs idealism","Type vs token"], c:0, e:"Critical = scientific refutation-seeking; dogmatic = defending/immunising (pseudo-science or normal science)."},
+  {q:"Kuhn's 'crisis' phase begins when…", o:["A new grant arrives","Anomalies accumulate that normal science can't solve","The paradigm is first formed","Scientists agree on everything"], c:1, e:"Mounting unsolved anomalies erode confidence and trigger crisis, then revolution."},
+  {q:"The phrase 'context of discovery vs context of justification' is most associated with…", o:["Kuhn","The logical positivists (Reichenbach)","Galton","Spinoza"], c:1, e:"Positivists separated how ideas are found (discovery) from whether they hold up (justification)."},
+  {q:"Why is 'all swans are white' a useful demarcation example?", o:["Swans are rare","It can't be conclusively verified but can be falsified by one black/turquoise swan","It is meaningless","It is analytic"], c:1, e:"No finite observation verifies the universal, but a single counter-example refutes it — Popper's point."},
+  {q:"Feyerabend's stance implies that strict methodological rules…", o:["Are essential to all progress","Can hinder scientific progress and shouldn't be absolute","Guarantee truth","Are the same as paradigms"], c:1, e:"He argued rigid rules can obstruct discovery; method should be flexible."},
+  {q:"Overall, the trajectory of Theme 5 shows the demarcation criterion repeatedly defeated by the same culprit, namely…", o:["Lack of funding","Theory-ladenness / the impossibility of neutral observation","Bad mathematics","Politics"], c:1, e:"Each criterion (verify, falsify) is undermined because observation is never theory-neutral."},
+  {q:"In Lakatos's scheme, the 'hard core' of a programme is shielded from refutation by…", o:["A methodological decision (the negative heuristic) to redirect blame to the protective belt","Direct empirical proof","Verification","Random sampling"], c:0, e:"By methodological convention, anomalies are blamed on adjustable auxiliaries (the belt), not the hard core."}
+];
+
+/* ===== THEME 6 — Research Methods (50) ===== */
+QUESTIONS.t6 = [
+  {q:"Operationalization is the process of…", o:["Turning a latent construct into a concrete, observable measure","Running an operation","Proving a theory true","Removing all error"], c:0, e:"Operationalization specifies how an abstract construct will be measured/observed."},
+  {q:"A 'construct' (e.g. anxiety) differs from a 'measure' (e.g. a questionnaire score) because the construct is…", o:["Directly observable","Latent / inferred from indicators","Always perfectly measured","A type of statistic"], c:1, e:"Constructs are unobservable and inferred via measures, which are imperfect indicators."},
+  {q:"'Operationism' (the rejected view) claims a concept…", o:["Is triangulated by many measures","IS nothing more than its measurement operations","Cannot be measured","Is innate"], c:1, e:"Strict operationism equates a concept with its single operation; the course rejects it."},
+  {q:"'Converging operations' (the accepted view) means…", o:["Using one perfect measure","Triangulating a construct with several imperfect indicators","Avoiding measurement","Operationism by another name"], c:1, e:"Multiple imperfect measures converging on the same construct is the accepted alternative to operationism."},
+  {q:"Which is an advantage of quantitative methods?", o:["They guarantee construct validity","Precision and inter-observer objectivity, enabling comparison and meta-analysis","They eliminate theory","They need no statistics"], c:1, e:"Quantification gives precision, objectivity, comparability and the reach to detect small effects."},
+  {q:"The honest caveat about quantification is that precision can come at the cost of…", o:["Speed","Construct validity (measuring the easily-counted, not the meaningful)","Sample size","Ethics approval"], c:1, e:"Counting what's easy may sacrifice whether you're measuring the construct you care about."},
+  {q:"Which are the standard conditions for inferring causation?", o:["Covariation, temporal precedence, exclusion of alternatives, a logical mechanism","Only correlation","A large sample only","Statistical significance only"], c:0, e:"Cause needs covariation, the cause preceding the effect, ruled-out alternatives, and a plausible mechanism."},
+  {q:"'Correlation is necessary but not sufficient for causation' means…", o:["Correlation proves cause","No correlation usually rules out cause, but correlation alone doesn't establish it","Cause needs no correlation","Correlation is irrelevant"], c:1, e:"You generally need covariation, but covariation by itself can't establish a causal direction or rule out confounds."},
+  {q:"If A and B correlate because a third variable C causes both, the relationship is…", o:["Causal","Spurious (common cause)","A mediation","Reverse causation"], c:1, e:"A common cause C producing both A and B makes the A–B correlation spurious."},
+  {q:"A variable that lies ON the causal path (A → M → B), explaining HOW/WHY, is a…", o:["Moderator","Mediator","Confound","Suppressor"], c:1, e:"A mediator transmits the effect (A→M→B) and answers the how/why question."},
+  {q:"A variable that changes the STRENGTH or DIRECTION of an A→B effect (for whom/when) is a…", o:["Mediator","Moderator","Confound","Common cause"], c:1, e:"A moderator alters the size/direction of the relationship — it answers 'for whom/under what conditions'."},
+  {q:"Mediator vs moderator, in one line:", o:["Mediator = for whom/when; moderator = how/why","Mediator = how/why, on the path; moderator = for whom/when, changes strength","They are identical","Both are confounds"], c:1, e:"Mediator is the mechanism on the path; moderator changes the strength/direction of the effect."},
+  {q:"A 'conceptual confound' differs from a spurious relationship because the variables…", o:["Have a common cause","Overlap in MEANING (no real causal model)","Are randomly assigned","Are unrelated"], c:1, e:"A conceptual confound is an overlap in meaning between A and B, not a causal structure."},
+  {q:"Which of the six possible relationships behind a correlation is NOT a causal model at all?", o:["Direct causation","Reverse causation","Conceptual confound (meaning overlap)","Mediation"], c:2, e:"A conceptual confound reflects overlapping meaning, not any causal arrow."},
+  {q:"Non-experimental designs are characterised by…", o:["Active manipulation of the IV","Measurement only, with no manipulation","Random assignment","Always longitudinal data"], c:1, e:"Non-experimental (descriptive, correlational) designs measure without manipulating."},
+  {q:"A descriptive design aims mainly to establish…", o:["Causation","Incidence, prevalence, means (what is the case)","Mediation","Falsification"], c:1, e:"Descriptive studies document how common/typical something is, not why."},
+  {q:"A correlational design is described as 'passive' because the researcher…", o:["Manipulates the IV","Observes naturally occurring variation without intervening","Randomly assigns participants","Uses no measures"], c:1, e:"Correlational designs measure naturally occurring variables without manipulation."},
+  {q:"A cross-sectional design measures different groups at one time; a longitudinal design…", o:["Measures the same participants over time","Uses no comparison","Manipulates the IV","Is always experimental"], c:0, e:"Longitudinal designs follow the same units across time."},
+  {q:"Experimental designs are defined by…", o:["Measurement only","Active manipulation of an independent variable","Naturalistic observation","Correlation"], c:1, e:"Experiments actively manipulate the IV to test its effect."},
+  {q:"A quasi-experiment manipulates an IV but lacks…", o:["A dependent variable","Random assignment to conditions","Any participants","Measurement"], c:1, e:"Quasi-experiments compare non-equivalent groups — no random assignment, so selection threats loom."},
+  {q:"The signature threat to validity in a quasi-experiment is…", o:["Maturation","Uncontrolled selection (non-equivalent groups)","Reactivity","Regression"], c:1, e:"Without randomisation, pre-existing group differences (selection) can masquerade as effects."},
+  {q:"A randomised controlled trial (RCT) is powerful because random assignment…", o:["Increases sample size","Removes selection bias by equating groups on average","Guarantees generalisation","Eliminates measurement error"], c:1, e:"Randomisation distributes confounds evenly, killing selection bias and enabling causal inference."},
+  {q:"The four kinds of validity, in the order usually asked, are…", o:["External → construct → internal → statistical","Statistical conclusion → internal → construct → external","Internal → external only","Construct → statistical only"], c:1, e:"First: is there an effect (statistical)? Then is it causal (internal), what is it (construct), does it generalise (external)?"},
+  {q:"Internal validity concerns whether…", o:["The effect generalises","The IV genuinely caused the change in the DV","The measure is reliable","The sample is representative"], c:1, e:"Internal validity = confidence that the manipulation, not a confound, caused the outcome."},
+  {q:"External validity concerns whether…", o:["The IV caused the DV","Results generalise to other people, settings and times","The test is internally consistent","The stats are correct"], c:1, e:"External validity = generalisability beyond the specific study."},
+  {q:"Construct validity asks…", o:["Did X cause Y?","WHAT was actually manipulated/measured (which ingredient of X)?","Is there any effect?","Does it generalise?"], c:1, e:"Construct validity concerns whether the operations capture the intended construct."},
+  {q:"'Internal validity' must not be confused with 'internal consistency', which is…", o:["A causal property","A reliability property of a measure","The same thing","About sampling"], c:1, e:"Internal consistency is a type of reliability (items hang together) — unrelated to causal internal validity."},
+  {q:"Regression to the mean is a threat that occurs when…", o:["Groups are randomly assigned","Extreme scorers are selected and re-tested with an unreliable measure","The sample is huge","The IV is manipulated"], c:1, e:"Selecting extremes plus measurement unreliability makes scores drift toward the mean, mimicking an effect."},
+  {q:"The Hawthorne effect is a threat to which validity?", o:["Statistical conclusion","Construct validity (participants change because they're observed)","External only","None"], c:1, e:"Being studied — not the treatment ingredient — changes behaviour, threatening construct validity."},
+  {q:"A wait-list control group helps rule out…", o:["Selection bias only","Assessment reactivity, hope, and spontaneous recovery","Random assignment","Measurement"], c:1, e:"Wait-list controls for the passage of time, repeated assessment, and expectancy of eventual help."},
+  {q:"A placebo / expectancy control group specifically controls for…", o:["The active ingredient","Expectancy of benefit and therapist contact","Random sampling","Attrition"], c:1, e:"Placebo controls isolate the treatment's specific effect from expectancy and attention."},
+  {q:"A 'dismantling' (component/additive) design compares…", o:["Two unrelated treatments","Treatment with vs without a specific component","Only a no-treatment group","Two samples of different size"], c:1, e:"Dismantling designs add/remove components to find which part of a treatment is active."},
+  {q:"A key limitation of RCTs is that…", o:["They can't have control groups","Some causes can't be ethically randomised; narrow inclusion can hurt external validity","They never establish causation","They require no participants"], c:1, e:"RCTs face ethical limits, narrow samples, attrition and uncontrolled researcher allegiance."},
+  {q:"'Random assignment' and 'random sampling' differ in that assignment concerns ___ and sampling concerns ___.", o:["generalisability; selection bias","allocation to conditions (internal validity); selection of participants (external validity)","nothing; everything","reliability; validity"], c:1, e:"Assignment (to conditions) removes selection bias; sampling (of participants) is about generalisability."},
+  {q:"The Hick–Hyman law states that reaction time is…", o:["Constant regardless of choices","A linear function of the information (bits) to be processed","Inversely related to age","Unrelated to choices"], c:1, e:"RT rises linearly with the amount of information (number of equally likely choices) transmitted."},
+  {q:"Donders' subtraction method infers a stage's duration by…", o:["Adding reaction times","Subtracting the RT of a task lacking that stage from one that has it","Counting errors","Measuring accuracy only"], c:1, e:"RT(with stage) − RT(without stage) = the stage's duration, assuming pure insertion."},
+  {q:"Sternberg's additive-factors logic says that if two factors have ADDITIVE effects on RT, they affect…", o:["The same processing stage","Different (separate) processing stages","No stage","Only accuracy"], c:1, e:"Additivity implies separate stages; an interaction (over-additivity) implies a shared stage."},
+  {q:"In Sternberg's logic, an INTERACTION between two factors on RT indicates they affect…", o:["Different stages","The same stage","No processing","The dependent variable only"], c:1, e:"Over-additive interaction signals the two factors tap the same processing stage."},
+  {q:"Sternberg's additive-factors method improves on Donders because it…", o:["Requires pure insertion","Does not assume deletable stages; it reads stage structure from interactions","Ignores reaction time","Uses no manipulation"], c:1, e:"It avoids Donders' fragile pure-insertion assumption by inferring stages from factor interactions."},
+  {q:"Reaction time is described as 'operationalization in action' because it is…", o:["A direct readout of thought","A measure of a latent process, uninformative without a theoretical framework","Always error-free","A construct, not a measure"], c:1, e:"RT only indexes hidden processes when interpreted through theory — linking methods to Theme 4."},
+  {q:"A no-treatment control group's main drawback is…", o:["It controls for nothing","Ethical concerns about withholding treatment","It removes selection bias","It is identical to placebo"], c:1, e:"No-treatment gives maximum contrast but raises ethics-of-withholding concerns."},
+  {q:"Which design best establishes causation?", o:["Cross-sectional correlational","Case study","Randomised controlled experiment","Naturalistic observation"], c:2, e:"Random assignment plus manipulation best supports causal inference (it operationalizes the intervention)."},
+  {q:"A researcher studies whether a tutoring effect is bigger for younger than older students. 'Age' here is a…", o:["Mediator","Moderator","Confound","Dependent variable"], c:1, e:"Age changes the size of the tutoring effect (for whom) — it's a moderator."},
+  {q:"A researcher shows that exercise improves mood BECAUSE it raises endorphins. Endorphins are a…", o:["Moderator","Mediator","Confound","Comparison group"], c:1, e:"Endorphins sit on the causal path (exercise→endorphins→mood) — a mediator (the why/how)."},
+  {q:"Threats to internal validity ask 'did X cause it?'; threats to construct validity ask…", o:["'Did anything happen?'","'Which ingredient of X worked?'","'Does it generalise?'","'Is it reliable?'"], c:1, e:"Construct-validity threats concern what part of the manipulation was actually responsible."},
+  {q:"'Maturation' as a threat means changes due to…", o:["The treatment","Natural development/time passing, not the IV","Random assignment","Measurement error"], c:1, e:"Participants change simply over time (growth, fatigue), confounding pre–post comparisons."},
+  {q:"Internal vs external validity often trade off because…", o:["More lab control boosts internal but can reduce real-world generalisability","They are unrelated","Both always rise together","External validity needs no sampling"], c:0, e:"Tight lab control aids causal (internal) inference but may make settings less like the real world (external)."},
+  {q:"A 'treatment-as-usual' (comparative) control group is used to…", o:["Maximise contrast with nothing","Compare the new treatment against an existing viable alternative","Avoid ethics review","Remove the DV"], c:1, e:"TAU compares the new treatment to standard care; it needs larger samples to detect differences."},
+  {q:"Which statement about RCTs is correct?", o:["Random assignment guarantees external validity","Random assignment addresses internal validity; generalisation still depends on sampling","RCTs need no comparison group","RCTs prove theories true"], c:1, e:"Randomisation secures internal (causal) validity; external validity still hinges on who was sampled."},
+  {q:"Overall, Theme 6 shows that method is philosophy made practical: the experiment operationalizes which concept of cause?", o:["Hume's constant conjunction","Woodward's interventionist cause (what a manipulation would change)","Aristotle's final cause","No concept of cause"], c:1, e:"Manipulating an IV is exactly Woodward's intervention — the experiment embodies the modern idea of cause."}
+];
+
+/* ===== THEME 7 — The Credibility Crisis (50) ===== */
+QUESTIONS.t7 = [
+  {q:"Wicherts' framework attaches a characteristic bias to each stage of the research cycle. At the OBSERVE stage, the bias is…", o:["p-hacking","Selective reading / citation bias","HARKing","Publication bias"], c:1, e:"Citation/selective-reading bias (over-citing early positive findings) corrupts the observe stage."},
+  {q:"At the HYPOTHESISE stage, Wicherts' characteristic bias is…", o:["HARKing","No blinding","Publication bias","p-hacking"], c:0, e:"HARKing (hypothesising after results are known) is the hypothesis-stage failure."},
+  {q:"At the ANALYSE stage, the characteristic bias is…", o:["Citation bias","p-hacking","Publication bias","HARKing"], c:1, e:"Exploiting analytic flexibility (p-hacking) corrupts the analysis stage."},
+  {q:"At the REPORT stage, the characteristic bias is…", o:["Publication bias / outcome switching / spin","Maturation","Random assignment","Latent learning"], c:0, e:"Publication bias and selective reporting corrupt how results are written up."},
+  {q:"Wagenmakers' rule that 'the data may be used only once' warns against…", o:["Replication","Using the data that suggested a hypothesis to also test it (double dipping)","Large samples","Preregistration"], c:1, e:"Double dipping (testing on the same data that generated the hypothesis) inflates Type-I error."},
+  {q:"Exploratory and confirmatory research differ in that confirmatory research…", o:["Generates hypotheses from data","Tests predictions fixed BEFORE seeing the data","Never uses statistics","Is always wrong"], c:1, e:"Confirmatory work fixes hypotheses/analyses in advance; exploratory work generates them from data."},
+  {q:"The honest problem is not exploration itself but…", o:["Doing any exploration","Presenting exploratory results AS IF they were confirmatory","Using control groups","Reporting effect sizes"], c:1, e:"Exploration is legitimate; the deceit is selling it as a confirmatory test."},
+  {q:"Reproducibility is defined as…", o:["New data → same result","Same data + same analysis → same result","A larger sample","A failed replication"], c:1, e:"Reproducibility: re-running the SAME analysis on the SAME data reproduces the result."},
+  {q:"Replicability is defined as…", o:["Same data + same analysis → same result","NEW data → same result","Using the same software","Citing the same papers"], c:1, e:"Replicability: an independent NEW dataset yields the same finding."},
+  {q:"The Reproducibility Project found that, of original studies that were significant, only about ___ replicated.", o:["97%","36%","75%","0%"], c:1, e:"Roughly 36% of replications were significant vs 97% of the originals — a stark replication gap."},
+  {q:"Fanelli found that psychology/psychiatry report positive (hypothesis-confirming) results at a rate of about…", o:["Under 50%","Over 90%","Exactly 50%","10%"], c:1, e:"Psychology tops the table with >90% positive results — implausibly high, signalling bias."},
+  {q:"A failed replication, by itself, does NOT prove the original effect is absent because…", o:["Replications are illegal","The failure could be Type-II error or a real contextual difference","Originals are always right","Data can't vary"], c:1, e:"Non-significant replications can reflect low power or genuine moderators, not necessarily a null effect."},
+  {q:"Confirmation bias is the tendency to…", o:["Seek and favour evidence supporting a favoured hypothesis","Always disconfirm your views","Use random sampling","Avoid all hypotheses"], c:0, e:"Confirmation bias skews search and interpretation toward one's preferred conclusion."},
+  {q:"The 'die-rolling' (dishonesty) experiments suggest people cheat more when…", o:["There is no benefit","It is ambiguous, justifiable, and feels harmless","They are watched closely","The stakes are zero"], c:1, e:"Ambiguity and self-justification (a harmless-seeming lie) increase dishonest behaviour — like honest p-hacking."},
+  {q:"Confirmation bias (psychology) is paralleled in sociology by Mitroff's…", o:["Organized skepticism","Organized dogmatism (defending one's own findings)","Universalism","Communalism"], c:1, e:"Mitroff's counternorm of organized dogmatism is the sociological face of the same tenacity."},
+  {q:"Confirmation bias is paralleled in the history of science by Kuhn's…", o:["Revolutionary science","Dogmatic 'normal science' (puzzle-solving within a paradigm)","Incommensurability","Falsification"], c:1, e:"Kuhn's normal science is committed, dogmatic puzzle-solving — the historical version of the same bias."},
+  {q:"Study publication bias (the 'file-drawer problem') filters out whole…", o:["Significant studies","Non-significant STUDIES (they go unpublished)","Outcomes within a study","Analyses"], c:1, e:"Non-significant whole studies stay in the file drawer, biasing the published literature."},
+  {q:"Selective OUTCOME reporting filters…", o:["Whole studies","Non-significant OUTCOMES within a published study","Citations","Authors"], c:1, e:"Within a study, only the significant outcomes get reported."},
+  {q:"Selective ANALYSIS reporting filters…", o:["The least impressive ANALYSES of the same data","Whole studies","Participants","References"], c:0, e:"Researchers report only the analysis that gave the nicest result."},
+  {q:"The three reporting biases differ by the LEVEL they filter:", o:["studies / outcomes / analyses","people / places / times","IV / DV / control","past / present / future"], c:0, e:"Publication bias filters studies; selective outcome filters outcomes; selective analysis filters analyses."},
+  {q:"The Proteus phenomenon describes how, early in a literature, studies report…", o:["Stable, modest effects","The most extreme effects, rapidly contradicted by opposite extremes","Only null results","Identical results"], c:1, e:"Early studies swing between extremes (named after the shape-shifting sea-god) before estimates settle."},
+  {q:"The mechanism of the Proteus phenomenon is a ___ bias.", o:["sampling","timing/publication (novel, contradictory results get fast-tracked)","measurement","funding"], c:1, e:"Surprising, contradictory early findings are highly publishable, so estimates oscillate."},
+  {q:"Proteus vs file-drawer: the key contrast is that Proteus…", o:["Hides null results","OVER-publishes extreme, oscillating early results (file-drawer suppresses nulls)","Is about sample size","Is the same as p-hacking"], c:1, e:"File-drawer suppresses nulls; Proteus over-publishes extreme, contradictory early effects."},
+  {q:"HARKing stands for…", o:["Hypothesising After the Results are Known","Highly Accurate Replication of Known Findings","Hypothesis Adjustment by Random Knowledge","Honest Analysis of Robust Knowledge"], c:0, e:"HARKing = presenting a post-hoc, data-driven hypothesis as if predicted in advance."},
+  {q:"HARKing is best captured by which metaphor?", o:["Measuring twice, cutting once","Drawing the target after firing the arrow","Reading the manual first","Pre-flight checklist"], c:1, e:"You fit the 'prediction' to where the data landed — drawing the bullseye after the shot."},
+  {q:"p-hacking refers to…", o:["Stealing data","Exploiting analytic flexibility until p < .05","Pre-registering analyses","Increasing sample size honestly"], c:1, e:"Trying many analyses/exclusions/covariates until significance appears — a form of overfitting."},
+  {q:"Optional stopping is the practice of…", o:["Stopping data collection the moment results reach p < .05","Never collecting data","Random assignment","Blinding"], c:0, e:"Peeking and stopping when significant inflates Type-I error far above the nominal 5%."},
+  {q:"Why does optional stopping inflate false positives?", o:["It reduces the sample","Each interim peek is another chance to cross the threshold by chance","It changes the DV","It is the same as HARKing"], c:1, e:"Repeatedly testing as data accrue means many opportunities for noise to cross p < .05."},
+  {q:"Optional stopping vs p-hacking: optional stopping manipulates ___, p-hacking manipulates ___.", o:["which analysis you run; when you stop sampling","WHEN you stop sampling; WHICH analysis you run","the hypothesis; the outcome","nothing; everything"], c:1, e:"Optional stopping is the sampling-side flexibility; p-hacking is the analysis-side flexibility."},
+  {q:"Outcome switching (common in clinical trials) is a special case of…", o:["Random assignment","HARKing (data-driven choice of the 'primary' outcome)","Reproducibility","Blinding"], c:1, e:"Renaming the primary outcome after seeing results is a reporting-stage HARKing variant."},
+  {q:"The three 'look-alikes' differ by what is data-driven: HARKing = ___, p-hacking = ___, outcome switching = ___.", o:["analysis; hypothesis; outcome","hypothesis; analysis; reported outcome","outcome; analysis; hypothesis","all the same"], c:1, e:"HARKing = the hypothesis; p-hacking = the analysis; outcome switching = the reported outcome."},
+  {q:"'Excess significance' as a detectable fingerprint of bias means…", o:["Too few significant results","More significant results than the studies' power should produce","Perfectly powered studies","No significant results"], c:1, e:"When significant findings exceed what power predicts, selective reporting is likely."},
+  {q:"'Small-study effects' refer to the pattern where…", o:["Larger studies show bigger effects","Smaller studies report larger effect sizes (a bias signature)","Effect size is constant","Sample size is irrelevant"], c:1, e:"In funnel plots, smaller studies showing inflated effects suggests publication/reporting bias."},
+  {q:"Preregistration combats bias chiefly by…", o:["Increasing sample size","Fixing hypotheses, outcomes and analyses BEFORE data are seen","Hiding the data","Allowing optional stopping"], c:1, e:"Locking the plan in advance prevents HARKing, p-hacking and outcome switching."},
+  {q:"A 'registered report' is special because peer review and acceptance happen…", o:["After results are known","BEFORE data collection (in-principle acceptance)","Only for positive results","Never"], c:1, e:"Registered reports are accepted on the basis of the plan, so publication doesn't depend on the results — directly countering publication bias."},
+  {q:"Transparency / open science recommends sharing…", o:["Nothing","Data, materials and analysis code (e.g. on the OSF)","Only conclusions","Only significant results"], c:1, e:"Open data, code and materials let others reproduce and scrutinise the work."},
+  {q:"The Bem (2011) ESP study is used as a cautionary example because it…", o:["Used preregistration","Used standard flexible practices to 'show' an implausible effect","Had a huge effect size","Was never published"], c:1, e:"Bem's pre-cognition results, using common QRPs, dramatised how flexible methods can 'prove' anything; a preregistered replication found strong evidence for the null."},
+  {q:"The slogan 'researchers are only human' implies that the fix must be…", o:["Hiring better people only","Changing incentives and procedures, not just intentions","Banning statistics","Ignoring the problem"], c:1, e:"Good intentions are insufficient; you must change incentives (reward quality, sharing, replication)."},
+  {q:"The 'context of discovery vs justification' distinction maps onto the crisis as…", o:["Reproducibility vs replicability","Exploratory vs confirmatory research","File-drawer vs Proteus","Type I vs Type II"], c:1, e:"Exploratory = discovery; confirmatory = justification; preregistration declares which mode you're in."},
+  {q:"Replication consortia (e.g. Many Labs) help by…", o:["Running one small study","Coordinating large, multi-site replications to estimate effects reliably","Hiding null results","Increasing p-hacking"], c:1, e:"Multi-lab replications give well-powered, transparent estimates of whether effects hold."},
+  {q:"The deepest proposed fix for the crisis is to change…", o:["The font of journals","Incentive structures (reward rigour, sharing and replication, not just positive results)","The number of authors","The colour of figures"], c:1, e:"Because the problem is systemic, reforming what gets rewarded is the structural cure."},
+  {q:"Higher statistical power is achieved mainly by…", o:["Smaller samples","Larger samples, repeated measures and lower measurement error","Optional stopping","HARKing"], c:1, e:"Bigger N, better measures and within-subject designs raise power, reducing false negatives."},
+  {q:"Disclosure checklists like CONSORT and ARRIVE aim to…", o:["Hide methods","Standardise transparent reporting of trials/animal studies","Increase publication bias","Replace peer review"], c:1, e:"Reporting standards force disclosure of design and analysis details, curbing selective reporting."},
+  {q:"Which best distinguishes reproducibility from replicability in one line?", o:["Same data/same analysis (reproducibility) vs new data (replicability)","They are identical","Reproducibility needs new data","Replicability needs the same data"], c:0, e:"Reproducibility re-runs the same analysis on the same data; replicability uses new data."},
+  {q:"The crisis is described as Hume's old worry 'grown up' because…", o:["Induction is now solved","Single significant results can't secure a general claim — replication is the real test","Causation is irrelevant","Data are now perfect"], c:1, e:"Hume's induction problem reappears: no single study settles a universal claim; replication is needed."},
+  {q:"Trim-and-fill, as a correction for publication bias, is described as…", o:["A perfect fix","Weak — it can give a false sense that distorted data are repaired","Illegal","The same as preregistration"], c:1, e:"Trim-and-fill only crudely adjusts funnel-plot asymmetry and can mislead."},
+  {q:"Which scenario is p-hacking (not optional stopping)?", o:["Checking significance after every 5 participants and stopping when p<.05","Trying 6 different covariate sets until one yields p<.05","Pre-registering the analysis","Running the planned test once"], c:1, e:"Searching across analysis choices for significance is p-hacking; peeking at accruing data is optional stopping."},
+  {q:"Which scenario is HARKing?", o:["Predicting the result in a preregistration","Finding an unexpected correlation and writing it up as the study's original prediction","Reporting all outcomes","Replicating a study"], c:1, e:"Presenting a post-hoc finding as an a-priori hypothesis is HARKing."},
+  {q:"Selective outcome reporting is most directly prevented by…", o:["Bigger fonts","Pre-specifying and reporting ALL primary/secondary outcomes","Optional stopping","Citation bias"], c:1, e:"Preregistering and reporting every outcome stops cherry-picking the significant ones."},
+  {q:"Overall, the credibility crisis shows the empirical cycle of Theme 4 with…", o:["No problems","A characteristic bias attached to every stage, fixed by open-science procedures","Only one bias","Random errors only"], c:1, e:"Each step of the cycle has a matching bias; open science (preregistration, transparency, replication) addresses them."}
+];
+
+/* === ENGINE === */
+const state = {}; // per theme {answered, correct}
+THEMES.forEach(t=> state[t.k] = {answered:0, correct:0, total:(QUESTIONS[t.k]||[]).length});
+let activeTheme = THEMES[0].k;
+const rendered = {};
+const LET = ["A","B","C","D","E"];
+
+const tabsEl = document.getElementById('tabs');
+const area = document.getElementById('quizArea');
+
+function buildTabs(){
+  tabsEl.innerHTML = '';
+  THEMES.forEach(t=>{
+    const s = state[t.k];
+    const el = document.createElement('div');
+    el.className = 'tab' + (t.k===activeTheme?' active':'');
+    el.style.setProperty('--c', t.color);
+    if(t.k===activeTheme){ el.style.background = t.color; }
+    el.innerHTML = `<span class="tn">${t.badge} ${t.n}</span><span>${t.t}</span><span class="sc">${s.correct}/${s.total}</span>`;
+    el.onclick = ()=>{ activeTheme = t.k; buildTabs(); showTheme(); };
+    tabsEl.appendChild(el);
+  });
+}
+
+function showTheme(){
+  const t = THEMES.find(x=>x.k===activeTheme);
+  area.innerHTML='';
+  const head = document.createElement('div');
+  head.className='theme-head';
+  head.innerHTML = `<div class="badge" style="background:${t.color}">${t.badge}</div>
+    <div><h2>${t.t}</h2><div class="sub">${t.n} · 50 practice questions · pick an answer to check yourself</div></div>`;
+  area.appendChild(head);
+
+  const prog = document.createElement('div');
+  prog.className='theme-progress';
+  prog.innerHTML = `<div class="row"><span id="tpLabel"></span><span id="tpPct"></span></div><div class="bar"><i id="tpBar" style="background:${t.color}"></i></div>`;
+  area.appendChild(prog);
+
+  const list = document.createElement('div');
+  (QUESTIONS[activeTheme]||[]).forEach((q,i)=> list.appendChild(renderQ(q,i,t)));
+  area.appendChild(list);
+
+  const done = document.createElement('div');
+  done.className='theme-done'; done.id='themeDone';
+  area.appendChild(done);
+
+  updateThemeProgress();
+}
+
+function renderQ(q,i,t){
+  const card = document.createElement('div');
+  card.className='q';
+  card.style.setProperty('--accent', t.color);
+  card.style.setProperty('--accent-bg', 'rgba(0,0,0,0.045)');
+  const opts = q.o.map((txt,j)=>`<button class="opt" data-j="${j}"><span class="lt">${LET[j]}</span><span>${txt}</span><span class="mark"></span></button>`).join('');
+  card.innerHTML = `<div class="qhead"><div class="num">${i+1}</div><div class="qt">${q.q}</div></div>
+    <div class="opts">${opts}</div>
+    <div class="expl" id="ex-${activeTheme}-${i}"></div>`;
+  const buttons = card.querySelectorAll('.opt');
+  buttons.forEach(b=>{
+    b.onclick = ()=> answer(card, buttons, q, i, parseInt(b.dataset.j));
+  });
+  return card;
+}
+
+function answer(card, buttons, q, i, chosen){
+  if(card.dataset.done) return;
+  card.dataset.done='1';
+  const correct = q.c;
+  buttons.forEach(b=>{
+    const j = parseInt(b.dataset.j);
+    b.classList.add('locked');
+    if(j===correct){ b.classList.add('correct'); b.querySelector('.mark').textContent='✓'; }
+    else if(j===chosen){ b.classList.add('wrong'); b.querySelector('.mark').textContent='✗'; }
+    else { b.classList.add('dim'); }
+  });
+  const isRight = chosen===correct;
+  const ex = document.getElementById(`ex-${activeTheme}-${i}`);
+  ex.className = 'expl show ' + (isRight?'r':'w');
+  ex.innerHTML = `<span class="verdict">${isRight?'✓ Correct':'✗ Not quite'}</span>` +
+    (isRight?'':`The answer is <b>${LET[correct]}: ${q.o[correct]}</b>. `) + q.e;
+
+  const s = state[activeTheme];
+  s.answered++; if(isRight) s.correct++;
+  updateOverall(); updateThemeProgress(); refreshTabScore();
+}
+
+function refreshTabScore(){
+  const tabs = tabsEl.querySelectorAll('.tab');
+  THEMES.forEach((t,idx)=>{
+    const s=state[t.k];
+    const sc = tabs[idx].querySelector('.sc');
+    if(sc) sc.textContent = `${s.correct}/${s.total}`;
+  });
+}
+
+function updateThemeProgress(){
+  const s = state[activeTheme];
+  const label = document.getElementById('tpLabel');
+  const pct = document.getElementById('tpPct');
+  const bar = document.getElementById('tpBar');
+  if(!label) return;
+  label.textContent = `Answered ${s.answered}/${s.total} · ${s.correct} correct`;
+  const p = s.total? Math.round(s.answered/s.total*100):0;
+  pct.textContent = p + '%';
+  bar.style.width = p + '%';
+  const done = document.getElementById('themeDone');
+  if(s.answered===s.total && s.total>0){
+    const score = Math.round(s.correct/s.total*100);
+    done.className='theme-done show';
+    let msg = score>=85?'Outstanding! 🏆':score>=70?'Solid work! 💪':score>=50?'Good start — review the misses. 📚':'Keep going — revisit this theme. 🔁';
+    done.innerHTML = `Theme complete · <b>${s.correct}/${s.total}</b> (${score}%) — ${msg}`;
+  } else if(done){ done.className='theme-done'; }
+}
+
+function updateOverall(){
+  let a=0,c=0,tot=0;
+  THEMES.forEach(t=>{ a+=state[t.k].answered; c+=state[t.k].correct; tot+=state[t.k].total; });
+  document.getElementById('ovCorrect').textContent=c;
+  document.getElementById('ovWrong').textContent=(a-c);
+  document.getElementById('ovAns').textContent=a;
+  document.getElementById('ovBar').style.width=(tot? a/tot*100:0)+'%';
+}
+
+buildTabs();
+showTheme();
+</script>
+</body>
+</html>
